@@ -1,0 +1,27 @@
+{{ render_contao_backend_template({
+    main: block('main'),
+    error: block('error'),
+    headline: block('headline'),
+    stylesheets: block('stylesheets'),
+    javascripts: block('javascripts'),
+    mootools: block('mootools')
+}) | raw }}
+
+{% block stylesheets %}
+    {% if stylesheets is defined %}
+        {% set stylesheets = stylesheets + ['bundles/cyberspectrumi18n/css/backend.css'] %}
+    {% else %}
+        {% set stylesheets = ['bundles/cyberspectrumi18n/css/backend.css'] %}
+    {% endif %}
+    {% for stylesheet in stylesheets %}
+        <link rel="stylesheet" href="{{ stylesheet }}">
+    {% endfor %}
+{% endblock %}
+
+{% block javascripts %}
+    {% if javascripts is defined %}
+        {% for javascript in javascripts %}
+            <script src="{{ javascript }}"></script>
+        {% endfor %}
+    {% endif %}
+{% endblock %}

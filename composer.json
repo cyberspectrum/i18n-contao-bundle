@@ -1,0 +1,65 @@
+{
+  "name": "cyberspectrum/i18n-contao-bundle",
+  "description": "Simple translation mapping and exporting of contao content",
+  "license": "MIT",
+  "keywords": [
+    "i18n"
+  ],
+  "type": "contao-bundle",
+  "homepage": "https://www.cyberspectrum.de/",
+  "authors": [
+    {
+      "name": "Christian Schiffler",
+      "email": "c.schiffler@cyberspectrum.de",
+      "homepage": "https://www.cyberspectrum.de",
+      "role": "Maintainer"
+    }
+  ],
+  "support": {
+    "email": "info@cyberspectrum.de",
+    "issues": "https://github.com/cyberspectrum/i18n-contao-bundle/issues",
+    "source": "https://github.com/cyberspectrum/i18n-contao-bundle"
+  },
+  "require": {
+    "php": "^7.1.3",
+    "contao/core-bundle": "^4.4.0",
+    "cyberspectrum/i18n": "^1.0.0@dev",
+    "cyberspectrum/i18n-contao": "^1.0.0@dev",
+    "cyberspectrum/i18n-xliff": "^1.0.0@dev",
+    "symfony/config": "^3.4 | 4.1",
+    "symfony/dependency-injection": "^3.4 | 4.1",
+    "symfony/form": "^3.4 | ^4.1",
+    "symfony/framework-bundle": "^3.4 | ^4.1",
+    "symfony/http-kernel": "^3.4 | 4.1",
+    "symfony/http-foundation": "^3.4 | 4.1",
+    "symfony/options-resolver": "^3.4 | 4.1",
+    "symfony/routing": "^3.4 | 4.1",
+    "symfony/templating": "^3.4 | 4.1"
+  },
+  "require-dev": {
+    "contao/manager-plugin": "^2.6.0",
+    "phpcq/all-tasks": "^1.2",
+    "metamodels/core": "^2.1@dev",
+    "contao-community-alliance/dc-general": "^2.1@dev",
+    "cyberspectrum/i18n-metamodels": "^1.0.0@dev"
+  },
+  "suggest": {
+    "cyberspectrum/i18n-metamodels": "For MetaModels support"
+  },
+  "autoload": {
+    "psr-4": {
+      "CyberSpectrum\\I18N\\ContaoBundle\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "CyberSpectrum\\I18N\\ContaoBundle\\Test\\": "tests"
+    }
+  },
+  "extra": {
+    "contao-manager-plugin": "CyberSpectrum\\I18N\\ContaoBundle\\ContaoManager\\Plugin",
+    "branch-alias": {
+      "dev-master": "1.0.x-dev"
+    }
+  }
+}

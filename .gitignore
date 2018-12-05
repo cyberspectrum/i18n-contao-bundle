@@ -1,0 +1,6 @@
+vendor/
+composer.lock
+
+build/
+build.properties
+phpunix.xml

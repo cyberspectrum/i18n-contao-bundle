@@ -1,0 +1,52 @@
+
+#translation_menu {
+    font-size: 150%;
+    background: #0f1c26;
+}
+
+#translation_submenu {
+    font-size: 150%;
+    background: #234058;
+}
+
+#translation_menu a, #translation_submenu a {
+    color: #fff;
+}
+
+#translation_menu li, #translation_submenu li {
+    padding: 5px;
+    display: inline-block;
+}
+
+#translation_submenu {
+    font-size: 110%;
+    margin-bottom: 1em;
+}
+
+#translation_menu .active {
+    
+}
+
+#mapping_errors li.warning {
+    padding: 3px 3px 3px 24px;
+    background: url("../../../system/themes/flexible/icons/error.svg") 3px 2px no-repeat;
+}
+
+#mapping_errors li span {
+    display: inline-block;
+}
+#mapping_errors li span.message {
+    width: 68%;
+}
+#mapping_errors li span.single-element {
+    width: 30%;
+}
+#mapping_errors li span.main-element {
+    width: 10%;
+}
+#mapping_errors li span.source-element {
+    width: 10%;
+}
+#mapping_errors li span.target-element {
+    width: 10%;
+}

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+This project is using the PHP code quality project (PHPCQ).
+
+For documentation visit:
+  https://github.com/phpcq/phpcq
+
+-->
+<project name="cyberspectrum/i18n-contao-bundle" default="build">
+    <import file="vendor/phpcq/phpcq/phpcq.main.xml" />
+    <target name="prepare">
+        <mkdir dir="${basedir}/build/logs"/>
+        <mkdir dir="${basedir}/build/pdepend"/>
+    </target>
+    <target
+            name="build"
+            depends="prepare, verify, analyze"
+            description="Do a full build"
+    />
+</project>

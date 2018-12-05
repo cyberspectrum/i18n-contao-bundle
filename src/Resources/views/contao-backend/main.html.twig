@@ -1,0 +1,36 @@
+{% extends "CyberSpectrumI18NContaoBundle:contao-backend:base.html.twig" %}
+
+{% set submenu_actions = {
+} %}
+
+{% block error %}
+    {%- if error is defined -%}
+        {{- error -}}
+    {%- endif -%}
+{% endblock %}
+
+{% block main %}
+    <ul id="translation_menu">
+        {% set menu_actions = {
+            'inspect-map': 'Map problems',
+        } %}
+        {% for action, name in menu_actions %}
+            <li>
+                <a class="{% if (app.request.get('act') == action) %}active{% endif %}" href="{{ url('cyberspectrum_i18n.contao-backend', {'act': action}) }}">{{ name }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+    <ul id="translation_submenu">
+        {% for name, sub_menu in submenu_actions %}
+            <li>
+                <a class="{{ name }}" href="{{ url('cyberspectrum_i18n.contao-backend', {'act': app.request.get('act')} + sub_menu.params) }}">{{ sub_menu.title }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <div class="translation_content">
+        {% block content %}
+        Hello.
+        {% endblock %}
+    </div>
+{% endblock %}
