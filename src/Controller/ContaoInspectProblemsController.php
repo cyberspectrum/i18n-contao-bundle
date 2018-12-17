@@ -76,7 +76,7 @@ class ContaoInspectProblemsController extends AbstractController
             default:
         }
 
-        return new Response($this->templating->render('CyberSpectrumTranslationBundle::contao-backend/main.html.twig'));
+        return new Response($this->templating->render('CyberSpectrumI18NContaoBundle::contao-backend/main.html.twig'));
     }
 
     /**
@@ -92,27 +92,24 @@ class ContaoInspectProblemsController extends AbstractController
             $map = 'tl_page';
         }
 
-        $data = [
-            'source' => $request->get('map'),
-            'target' => $request->get('map'),
-        ];
-
-        $form = $this->createForm(InspectMappingFormType::class, $data);
+        $form = $this->createForm(InspectMappingFormType::class);
+        $form->handleRequest($request);
 
         $logger = new BufferingLogger();
-        $this->mapBuilder->setLogger($logger);
-
-        $this->mapBuilder->getMappingFor($map, 'en', 'tr');
-
+        $data   = $form->getData();
         $errors = [];
-        foreach ($logger->cleanLogs() as $message) {
-            if ([] !== ($converted = $this->convertMessage($message))) {
-                $errors[] = $converted;
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->mapBuilder->setLogger($logger);
+            $this->mapBuilder->getMappingFor($map, $data['source'], $data['target']);
+            foreach ($logger->cleanLogs() as $message) {
+                if ([] !== ($converted = $this->convertMessage($message))) {
+                    $errors[] = $converted;
+                }
             }
         }
 
         return $this->render(
-            'CyberSpectrumTranslationBundle::contao-backend/terminal42-map-problems.html.twig',
+            'CyberSpectrumI18NContaoBundle::contao-backend/terminal42-map-problems.html.twig',
             [
                 'form'   => $form->createView(),
                 'errors' => $errors,
