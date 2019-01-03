@@ -10,6 +10,7 @@ services:
       -
         - '@cyberspectrum_i18n.contao.extractor.tl_content.rsce_data.link_label'
         - '@cyberspectrum_i18n.contao.extractor.tl_content.rsce_data.boxes'
+        - '@cyberspectrum_i18n.contao.extractor.tl_content.rsce_data.text'
     tags:
       - { name: !php/const CyberSpectrum\I18N\ContaoBundle\DependencyInjection\CompilerPass\CollectContaoExtractorsPass::TAG_CONTAO_EXTRACTOR, table: 'tl_content' }
       - {
@@ -23,6 +24,11 @@ services:
     class: CyberSpectrum\I18N\Contao\Extractor\TextExtractor
     arguments:
       - 'linkLabel'
+
+  cyberspectrum_i18n.contao.extractor.tl_content.rsce_data.text:
+    class: CyberSpectrum\I18N\Contao\Extractor\TextExtractor
+    arguments:
+      - 'text'
 
   ## tl_content.rsce_data.boxes
   cyberspectrum_i18n.contao.extractor.tl_content.rsce_data.boxes:
