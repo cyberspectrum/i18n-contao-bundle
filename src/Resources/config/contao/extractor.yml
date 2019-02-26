@@ -103,3 +103,16 @@ services:
           type: expression,
           expression: "row.type in ['text']"
         }
+
+  ## tl_content.mooHeadline
+  cyberspectrum_i18n.contao.extractor.tl_content.moo_headline:
+    class: CyberSpectrum\I18N\Contao\Extractor\TextExtractor
+    arguments:
+      - 'mooHeadline'
+    tags:
+      - { name: !php/const CyberSpectrum\I18N\ContaoBundle\DependencyInjection\CompilerPass\CollectContaoExtractorsPass::TAG_CONTAO_EXTRACTOR, table: 'tl_content' }
+      - {
+          name: !php/const CyberSpectrum\I18N\ContaoBundle\DependencyInjection\CompilerPass\CollectExtractorConditionsPass::TAG_CONTAO_EXTRACTOR_CONDITION,
+          type: expression,
+          expression: "row.type in ['accordionStart', 'accordionSingle']"
+        }
