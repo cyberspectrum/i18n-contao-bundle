@@ -10,6 +10,12 @@ services:
     tags:
       - { name: !php/const CyberSpectrum\I18NBundle\DependencyInjection\CompilerPass\CollectDictionaryProvidersPass::TAG_DICTIONARY_PROVIDER, provider: 'contao' }
 
+  CyberSpectrum\I18N\ContaoBundle\Command\DebugMapCommand:
+    arguments:
+      - '@cyberspectrum_i18n.contao.default_map_builder'
+    tags:
+      - { name: console.command }
+
   cyberspectrum_i18n.expression_language:
     class: Symfony\Component\ExpressionLanguage\ExpressionLanguage
     # FIXME: add some cache here.
