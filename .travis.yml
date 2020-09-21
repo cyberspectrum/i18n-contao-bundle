@@ -22,7 +22,8 @@ env:
 before_script:
   - echo "memory_limit=-1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
   - travis_retry composer self-update && composer --version
-  - travis_retry composer require symfony/config ${SYMFONY_VERSION} --no-update
+  # Contao currently conflicts with symfony 5.0 config
+  # - travis_retry composer require symfony/config ${SYMFONY_VERSION} --no-update
   - travis_retry composer require symfony/dependency-injection ${SYMFONY_VERSION} --no-update
   - travis_retry composer require symfony/form ${SYMFONY_VERSION} --no-update
   - travis_retry composer require symfony/framework-bundle ${SYMFONY_VERSION} --no-update
