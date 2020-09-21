@@ -123,6 +123,9 @@ class ContaoInspectProblemsController extends AbstractController
      * @param array $message The error message to convert.
      *
      * @return array
+     *
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
     private function convertMessage(array $message): array
     {
@@ -252,10 +255,5 @@ class ContaoInspectProblemsController extends AbstractController
         }
 
         return strtr($message, $params);
-    }
-
-    private function showContents()
-    {
-
     }
 }
