@@ -30,6 +30,7 @@ use Contao\ManagerPlugin\Routing\RoutingPluginInterface;
 use CyberSpectrum\I18N\ContaoBundle\CyberSpectrumI18NContaoBundle;
 use CyberSpectrum\I18NBundle\CyberSpectrumI18NBundle;
 use MetaModels\CoreBundle\MetaModelsCoreBundle;
+use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\Config\Loader\LoaderResolverInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
@@ -48,8 +49,10 @@ class Plugin implements BundlePluginInterface, ConfigPluginInterface, RoutingPlu
             BundleConfig::create(CyberSpectrumI18NContaoBundle::class)
                 ->setLoadAfter(
                     [
+                        FrameworkBundle::class,
                         ContaoCoreBundle::class,
                         MetaModelsCoreBundle::class,
+                        CyberSpectrumI18NBundle::class,
                     ]
                 ),
             BundleConfig::create(CyberSpectrumI18NBundle::class)

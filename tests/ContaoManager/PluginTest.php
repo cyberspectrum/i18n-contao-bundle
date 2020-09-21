@@ -29,6 +29,7 @@ use CyberSpectrum\I18N\ContaoBundle\CyberSpectrumI18NContaoBundle;
 use CyberSpectrum\I18NBundle\CyberSpectrumI18NBundle;
 use MetaModels\CoreBundle\MetaModelsCoreBundle;
 use PHPUnit\Framework\TestCase;
+use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\Config\Loader\LoaderResolverInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
@@ -55,7 +56,15 @@ class PluginTest extends TestCase
         /** @var ConfigInterface $bundle */
         $bundle = $bundles[0];
         $this->assertSame(CyberSpectrumI18NContaoBundle::class, $bundle->getName());
-        $this->assertSame([ContaoCoreBundle::class, MetaModelsCoreBundle::class], $bundle->getLoadAfter());
+        $this->assertSame(
+            [
+                ContaoCoreBundle::class,
+                CyberSpectrumI18NBundle::class,
+                MetaModelsCoreBundle::class,
+                FrameworkBundle::class,
+            ],
+            $bundle->getLoadAfter()
+        );
         $bundle = $bundles[1];
         $this->assertSame(CyberSpectrumI18NBundle::class, $bundle->getName());
     }
