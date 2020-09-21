@@ -47,9 +47,11 @@ class CyberSpectrumI18NContaoBundle extends Bundle
         $container->addCompilerPass(new CollectExtractorConditionsPass());
         $container->addCompilerPass(new CollectMetaModelAttributeHandlerPass());
         // Priority lowered, so other extensions may set defaults before we add ours as last resort.
-        $container->addCompilerPass(new SetDefaultsPass(),
+        $container->addCompilerPass(
+            new SetDefaultsPass(),
             PassConfig::TYPE_BEFORE_OPTIMIZATION,
-            -10);
+            -10
+        );
         // Priority must be higher than that of the CollectExtractorConditionsPass as otherwise the extractors won't be
         // decorated with the conditions.
         $container->addCompilerPass(

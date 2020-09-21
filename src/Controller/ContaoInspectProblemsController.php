@@ -134,12 +134,12 @@ class ContaoInspectProblemsController extends AbstractController
             return [];
         }
 
-        switch ($context['msg_type'] ?? '') {
+        switch (($context['msg_type'] ?? '')) {
             case 'no_source_for_target':
-                $hrefMain = null;
+                $hrefMain   = null;
                 $hrefSource = null;
                 $hrefTarget = null;
-                $origin = null;
+                $origin     = null;
                 switch ($context['class']) {
                     case ArticleMap::class:
                         $origin = 'article';
@@ -164,6 +164,9 @@ class ContaoInspectProblemsController extends AbstractController
                                 'id'    => $context['sourceId'],
                             ]);
                         }
+                        break;
+                    default:
+                        break 2;
                 }
 
                 return [
@@ -229,24 +232,38 @@ class ContaoInspectProblemsController extends AbstractController
                     'processed' => $this->transformMessage($text, $context),
                     'origin'       => 'article',
                 ];
-
             default:
-                return [
-                    'type'    => $context['msg_type'] ?? '?',
-                    'level'   => $level,
-                    'message' => $text,
-                    'context' => $context,
-                    'processed' => $this->transformMessage($text, $context)
-                ];
         }
+        return [
+            'type'    => ($context['msg_type'] ?? '?'),
+            'level'   => $level,
+            'message' => $text,
+            'context' => $context,
+            'processed' => $this->transformMessage($text, $context)
+        ];
     }
 
+    /**
+     * Merge the request token into the link parameters.
+     *
+     * @param array $params The parameters.
+     *
+     * @return array
+     */
     private function link(array $params): array
     {
         // FIXME: fetch request token via service.
-        return $params + ['rt' => REQUEST_TOKEN];
+        return ($params + ['rt' => REQUEST_TOKEN]);
     }
 
+    /**
+     * Transform the message by replacing the context parameters.
+     *
+     * @param string $message The message template.
+     * @param array  $context The context parameters.
+     *
+     * @return string
+     */
     private function transformMessage(string $message, array $context): string
     {
         $params = [];

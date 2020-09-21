@@ -47,6 +47,8 @@ class SetDefaultsPass implements CompilerPassInterface
      * @param ContainerBuilder $container The container builder.
      *
      * @return void
+     *
+     * @throws \RuntimeException When no default map builder has been defined.
      */
     private function setDefaultMapBuilder(ContainerBuilder $container): void
     {
