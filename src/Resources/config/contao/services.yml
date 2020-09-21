@@ -38,6 +38,8 @@ services:
     arguments:
       - '@templating'
       - '@cyberspectrum_i18n.contao.default_map_builder'
+      - '@contao.csrf.token_manager'
+      - '%contao.csrf_token_name%'
     tags: ['controller.service_arguments']
 
   CyberSpectrum\I18N\ContaoBundle\FormType\InspectMappingFormType:

@@ -30,6 +30,7 @@ before_script:
   - travis_retry composer require symfony/http-foundation ${SYMFONY_VERSION} --no-update
   - travis_retry composer require symfony/options-resolver ${SYMFONY_VERSION} --no-update
   - travis_retry composer require symfony/routing ${SYMFONY_VERSION} --no-update
+  - travis_retry composer require symfony/security-csrf ${SYMFONY_VERSION} --no-update
   - travis_retry composer require symfony/templating ${SYMFONY_VERSION} --no-update
   - >
     if [ "x${TRAVIS_TAG}" != "x" ]; then

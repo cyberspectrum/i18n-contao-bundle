@@ -28,6 +28,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Debug\BufferingLogger;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Csrf\CsrfTokenManager;
 use Symfony\Component\Templating\EngineInterface;
 
 /**
@@ -50,15 +51,37 @@ class ContaoInspectProblemsController extends AbstractController
     private $mapBuilder;
 
     /**
+     * The CSRF token manager.
+     *
+     * @var CsrfTokenManager
+     */
+    private $csrfTokenManager;
+
+    /**
+     * The CSRF token name.
+     *
+     * @var string
+     */
+    private $csrfTokenName;
+
+    /**
      * Create a new instance.
      *
-     * @param EngineInterface     $templating The twig engine.
-     * @param MapBuilderInterface $mapBuilder The database.
+     * @param EngineInterface     $templating       The twig engine.
+     * @param MapBuilderInterface $mapBuilder       The database.
+     * @param CsrfTokenManager    $csrfTokenManager The CSRF token manager to use.
+     * @param string              $csrfTokenName    The CSRF token name to use.
      */
-    public function __construct(EngineInterface $templating, MapBuilderInterface $mapBuilder)
-    {
-        $this->templating = $templating;
-        $this->mapBuilder = $mapBuilder;
+    public function __construct(
+        EngineInterface $templating,
+        MapBuilderInterface $mapBuilder,
+        CsrfTokenManager $csrfTokenManager,
+        string $csrfTokenName
+    ) {
+        $this->templating       = $templating;
+        $this->mapBuilder       = $mapBuilder;
+        $this->csrfTokenManager = $csrfTokenManager;
+        $this->csrfTokenName    = $csrfTokenName;
     }
 
     /**
@@ -252,8 +275,7 @@ class ContaoInspectProblemsController extends AbstractController
      */
     private function link(array $params): array
     {
-        // FIXME: fetch request token via service.
-        return ($params + ['rt' => REQUEST_TOKEN]);
+        return ($params + ['rt' => $this->csrfTokenManager->getToken($this->csrfTokenName)->getValue()]);
     }
 
     /**
