@@ -26,21 +26,21 @@
     "cyberspectrum/i18n": "^1.0.0@dev",
     "cyberspectrum/i18n-contao": "^1.0.0@dev",
     "cyberspectrum/i18n-xliff": "^1.0.0@dev",
-    "symfony/config": "^3.4 | 4.1",
-    "symfony/dependency-injection": "^3.4 | 4.1",
-    "symfony/form": "^3.4 | ^4.1",
-    "symfony/framework-bundle": "^3.4 | ^4.1",
-    "symfony/http-kernel": "^3.4 | 4.1",
-    "symfony/http-foundation": "^3.4 | 4.1",
-    "symfony/options-resolver": "^3.4 | 4.1",
-    "symfony/routing": "^3.4 | 4.1",
-    "symfony/templating": "^3.4 | 4.1"
+    "symfony/config": "^3.4 | ^4.1 | ^5.0",
+    "symfony/dependency-injection": "^3.4 | ^4.1 | ^5.0",
+    "symfony/form": "^3.4 | ^4.1 | ^5.0",
+    "symfony/framework-bundle": "^3.4 | ^4.1 | ^5.0",
+    "symfony/http-kernel": "^3.4 | ^4.1 | ^5.0",
+    "symfony/http-foundation": "^3.4 | ^4.1 | ^5.0",
+    "symfony/options-resolver": "^3.4 | ^4.1 | ^5.0",
+    "symfony/routing": "^3.4 | ^4.1 | ^5.0",
+    "symfony/templating": "^3.4 | ^4.1 | ^5.0"
   },
   "require-dev": {
     "contao/manager-plugin": "^2.6.0",
-    "phpcq/all-tasks": "^1.2",
-    "metamodels/core": "^2.1@dev",
-    "contao-community-alliance/dc-general": "^2.1@dev",
+    "phpcq/all-tasks": "^1.3",
+    "metamodels/core": "^2.1",
+    "contao-community-alliance/dc-general": "^2.1",
     "cyberspectrum/i18n-metamodels": "^1.0.0@dev"
   },
   "suggest": {
