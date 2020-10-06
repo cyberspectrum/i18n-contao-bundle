@@ -1,3 +1,5 @@
 # Framework configuration
 framework:
   form: { enabled: true }
+  templating:
+    engines: ['twig']
