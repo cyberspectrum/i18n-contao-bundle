@@ -39,6 +39,11 @@ class SetDefaultsPass implements CompilerPassInterface
         if ($container->has(ContaoDictionaryProvider::class)) {
             $this->setDefaultMapBuilder($container);
         }
+
+        $container->setAlias(
+            'cyberspectrum_i18n.contao.csrf.token_manager',
+            $container->has('contao.csrf.token_manager') ? 'contao.csrf.token_manager' : 'security.csrf.token_storage'
+        );
     }
 
     /**
