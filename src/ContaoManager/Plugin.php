@@ -1,23 +1,6 @@
 <?php
 
-/**
- * This file is part of cyberspectrum/i18n-contao-bundle.
- *
- * (c) 2018 CyberSpectrum.
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- *
- * This project is provided in good faith and hope to be usable by anyone.
- *
- * @package    cyberspectrum/i18n-contao-bundle
- * @author     Christian Schiffler <c.schiffler@cyberspectrum.de>
- * @copyright  2018 CyberSpectrum.
- * @license    https://github.com/cyberspectrum/i18n-contao-bundle/blob/master/LICENSE MIT
- * @filesource
- */
-
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace CyberSpectrum\I18N\ContaoBundle\ContaoManager;
 
@@ -27,13 +10,14 @@ use Contao\ManagerPlugin\Bundle\Config\BundleConfig;
 use Contao\ManagerPlugin\Bundle\Parser\ParserInterface;
 use Contao\ManagerPlugin\Config\ConfigPluginInterface;
 use Contao\ManagerPlugin\Routing\RoutingPluginInterface;
-use CyberSpectrum\I18N\ContaoBundle\CyberSpectrumI18NContaoBundle;
 use CyberSpectrum\I18NBundle\CyberSpectrumI18NBundle;
+use CyberSpectrum\I18N\ContaoBundle\CyberSpectrumI18NContaoBundle;
 use MetaModels\CoreBundle\MetaModelsCoreBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\Config\Loader\LoaderResolverInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
+use Symfony\Component\Routing\RouteCollection;
 
 /**
  * Plugin for the Contao Manager.
@@ -43,7 +27,7 @@ class Plugin implements BundlePluginInterface, ConfigPluginInterface, RoutingPlu
     /**
      * {@inheritdoc}
      */
-    public function getBundles(ParserInterface $parser)
+    public function getBundles(ParserInterface $parser): array
     {
         return [
             BundleConfig::create(CyberSpectrumI18NContaoBundle::class)
@@ -62,18 +46,26 @@ class Plugin implements BundlePluginInterface, ConfigPluginInterface, RoutingPlu
     /**
      * {@inheritDoc}
      */
-    public function registerContainerConfiguration(LoaderInterface $loader, array $managerConfig)
+    public function registerContainerConfiguration(LoaderInterface $loader, array $managerConfig): void
     {
         $loader->load('@CyberSpectrumI18NContaoBundle/Resources/contao-manager/framework.yml');
     }
 
     /**
      * {@inheritDoc}
+     *
+     * @psalm-suppress MixedInferredReturnType
+     * @psalm-suppress MixedReturnStatement
      */
-    public function getRouteCollection(LoaderResolverInterface $resolver, KernelInterface $kernel)
+    public function getRouteCollection(LoaderResolverInterface $resolver, KernelInterface $kernel): ?RouteCollection
     {
-        return $resolver
-            ->resolve(__DIR__.'/../Resources/config/contao/routing.yml')
-            ->load(__DIR__.'/../Resources/config/contao/routing.yml');
+        $loader = $resolver->resolve(__DIR__ . '/../Resources/config/contao/routing.yml');
+
+        if (!$loader instanceof LoaderInterface) {
+            throw new \RuntimeException('Failed to load routes');
+        }
+
+        return $loader
+            ->load(__DIR__ . '/../Resources/config/contao/routing.yml');
     }
 }

@@ -1,23 +1,6 @@
 <?php
 
-/**
- * This file is part of cyberspectrum/i18n-contao-bundle.
- *
- * (c) 2018 CyberSpectrum.
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- *
- * This project is provided in good faith and hope to be usable by anyone.
- *
- * @package    cyberspectrum/i18n-contao-bundle
- * @author     Christian Schiffler <c.schiffler@cyberspectrum.de>
- * @copyright  2018 CyberSpectrum.
- * @license    https://github.com/cyberspectrum/i18n-contao-bundle/blob/master/LICENSE MIT
- * @filesource
- */
-
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace CyberSpectrum\I18N\ContaoBundle\Test\DependencyInjection\CompilerPass;
 
@@ -25,23 +8,17 @@ use CyberSpectrum\I18N\Contao\Extractor\StringExtractorInterface;
 use CyberSpectrum\I18N\Contao\ExtractorFactory;
 use CyberSpectrum\I18N\ContaoBundle\DependencyInjection\CompilerPass\CollectContaoExtractorsPass;
 use PHPUnit\Framework\TestCase;
+use RuntimeException;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\DependencyInjection\ServiceLocator;
 
-/**
- * This tests the service collector pass.
- *
- * @covers \CyberSpectrum\I18N\ContaoBundle\DependencyInjection\CompilerPass\CollectContaoExtractorsPass
- */
+use function array_keys;
+
+/** @covers \CyberSpectrum\I18N\ContaoBundle\DependencyInjection\CompilerPass\CollectContaoExtractorsPass */
 class CollectContaoExtractorsPassTest extends TestCase
 {
-    /**
-     * Test.
-     *
-     * @return void
-     */
     public function testCollectExtractors(): void
     {
         $container = new ContainerBuilder();
@@ -70,20 +47,15 @@ class CollectContaoExtractorsPassTest extends TestCase
 
         $extractorList = $extractorContainer->getArgument(0);
 
-        $this->assertSame(
+        self::assertSame(
             ['tl_something' => ['service']],
             $container->getParameter('cyberspectrum_i18n.contao.extractors')
         );
-        $this->assertSame(['service'], \array_keys($extractorList));
-        $this->assertInstanceOf(Reference::class, $extractorList['service']);
-        $this->assertSame('service', (string) $extractorList['service']);
+        self::assertSame(['service'], array_keys($extractorList));
+        self::assertInstanceOf(Reference::class, $extractorList['service']);
+        self::assertSame('service', (string) $extractorList['service']);
     }
 
-    /**
-     * Test.
-     *
-     * @return void
-     */
     public function testCollectExtractorsThrowsForServiceWithoutTableName(): void
     {
         $container = new ContainerBuilder();
@@ -103,7 +75,7 @@ class CollectContaoExtractorsPassTest extends TestCase
             ]
         );
 
-        $this->expectException(\RuntimeException::class);
+        $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('Tagged service "service" has no table name.');
 
         $servicePass = new CollectContaoExtractorsPass();

@@ -22,13 +22,18 @@
   },
   "require": {
     "php": "^7.1.3",
+    "ext-hash": "*",
+    "ext-json": "*",
     "contao/core-bundle": "^4.4.0",
     "cyberspectrum/i18n": "dev-fix/phpcq-2 as 1.0.0@dev",
     "cyberspectrum/i18n-bundle": "dev-fix/phpcq-2 as 1.0.0@dev",
     "cyberspectrum/i18n-contao": "dev-fix/phpcq-2 as 1.0.0@dev",
     "cyberspectrum/i18n-xliff": "dev-fix/phpcq-2 as 1.0.0@dev",
+    "psr/log": "^1.1.4 || ^2.0 || ^3.0",
     "symfony/config": "^3.4 || ^4.1 || ^5.0",
+    "symfony/console": "^3.4 || ^4.1 || ^5.0",
     "symfony/dependency-injection": "^4.4 || ^5.4 || ^6.0",
+    "symfony/error-handler": "^4.4 || ^5.4 || ^6.0",
     "symfony/form": "^4.4 || ^5.4 || ^6.0",
     "symfony/framework-bundle": "^4.4 || ^5.4 || ^6.0",
     "symfony/http-foundation": "^4.4 || ^5.4 || ^6.0",
@@ -40,9 +45,8 @@
   },
   "require-dev": {
     "contao-community-alliance/dc-general": "^2.1",
-    "contao/manager-plugin": "^2.6.0",
+    "contao/manager-plugin": "^2.10.1",
     "cyberspectrum/i18n-metamodels": "dev-fix/phpcq-2 as 1.0.0@dev",
-    "metamodels/core": "^2.1",
     "phpcq/runner-bootstrap": "^1.0@dev"
   },
   "suggest": {

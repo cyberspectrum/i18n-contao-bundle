@@ -1,23 +1,6 @@
 <?php
 
-/**
- * This file is part of cyberspectrum/i18n-contao-bundle.
- *
- * (c) 2018 CyberSpectrum.
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- *
- * This project is provided in good faith and hope to be usable by anyone.
- *
- * @package    cyberspectrum/i18n-contao-bundle
- * @author     Christian Schiffler <c.schiffler@cyberspectrum.de>
- * @copyright  2018 CyberSpectrum.
- * @license    https://github.com/cyberspectrum/i18n-contao-bundle/blob/master/LICENSE MIT
- * @filesource
- */
-
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace CyberSpectrum\I18N\ContaoBundle\FormType;
 
@@ -33,19 +16,11 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class InspectMappingFormType extends AbstractType
 {
-    /**
-     * The Contao map builder.
-     *
-     * @var MapBuilderInterface
-     */
-    private $mapBuilder;
+    /** The Contao map builder. */
+    private MapBuilderInterface $mapBuilder;
 
-    /**
-     * The Contao token name.
-     *
-     * @var string
-     */
-    private $tokenName;
+    /** The Contao token name. */
+    private string $tokenName;
 
     /**
      * Create a new instance.
@@ -62,7 +37,7 @@ class InspectMappingFormType extends AbstractType
     /**
      * {@inheritDoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $languages = [];
         foreach ($this->mapBuilder->getSupportedLanguages() as $language) {
@@ -78,7 +53,7 @@ class InspectMappingFormType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'csrf_field_name' => 'REQUEST_TOKEN',
@@ -86,10 +61,7 @@ class InspectMappingFormType extends AbstractType
         ]);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return '';
     }
