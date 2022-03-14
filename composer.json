@@ -2,11 +2,10 @@
   "name": "cyberspectrum/i18n-contao-bundle",
   "description": "Simple translation mapping and exporting of contao content",
   "license": "MIT",
+  "type": "contao-bundle",
   "keywords": [
     "i18n"
   ],
-  "type": "contao-bundle",
-  "homepage": "https://www.cyberspectrum.de/",
   "authors": [
     {
       "name": "Christian Schiffler",
@@ -15,6 +14,7 @@
       "role": "Maintainer"
     }
   ],
+  "homepage": "https://www.cyberspectrum.de/",
   "support": {
     "email": "info@cyberspectrum.de",
     "issues": "https://github.com/cyberspectrum/i18n-contao-bundle/issues",
@@ -23,27 +23,27 @@
   "require": {
     "php": "^7.1.3",
     "contao/core-bundle": "^4.4.0",
-    "cyberspectrum/i18n": "^1.0.0@dev",
-    "cyberspectrum/i18n-bundle": "^1.0.0@dev",
-    "cyberspectrum/i18n-contao": "^1.0.0@dev",
-    "cyberspectrum/i18n-xliff": "^1.0.0@dev",
-    "symfony/config": "^3.4 | ^4.1 | ^5.0",
-    "symfony/dependency-injection": "^3.4 | ^4.1 | ^5.0",
-    "symfony/form": "^3.4 | ^4.1 | ^5.0",
-    "symfony/framework-bundle": "^3.4 | ^4.1 | ^5.0",
-    "symfony/http-kernel": "^3.4 | ^4.1 | ^5.0",
-    "symfony/http-foundation": "^3.4 | ^4.1 | ^5.0",
-    "symfony/options-resolver": "^3.4 | ^4.1 | ^5.0",
-    "symfony/routing": "^3.4 | ^4.1 | ^5.0",
-    "symfony/security-csrf": "^3.4 | ^4.1 | ^5.0",
-    "symfony/templating": "^3.4 | ^4.1 | ^5.0"
+    "cyberspectrum/i18n": "dev-fix/phpcq-2 as 1.0.0@dev",
+    "cyberspectrum/i18n-bundle": "dev-fix/phpcq-2 as 1.0.0@dev",
+    "cyberspectrum/i18n-contao": "dev-fix/phpcq-2 as 1.0.0@dev",
+    "cyberspectrum/i18n-xliff": "dev-fix/phpcq-2 as 1.0.0@dev",
+    "symfony/config": "^3.4 || ^4.1 || ^5.0",
+    "symfony/dependency-injection": "^4.4 || ^5.4 || ^6.0",
+    "symfony/form": "^4.4 || ^5.4 || ^6.0",
+    "symfony/framework-bundle": "^4.4 || ^5.4 || ^6.0",
+    "symfony/http-foundation": "^4.4 || ^5.4 || ^6.0",
+    "symfony/http-kernel": "^4.4 || ^5.4 || ^6.0",
+    "symfony/options-resolver": "^4.4 || ^5.4 || ^6.0",
+    "symfony/routing": "^4.4 || ^5.4 || ^6.0",
+    "symfony/security-csrf": "^4.4 || ^5.4 || ^6.0",
+    "symfony/templating": "^4.4 || ^5.4 || ^6.0"
   },
   "require-dev": {
-    "contao/manager-plugin": "^2.6.0",
-    "phpcq/all-tasks": "^1.3",
-    "metamodels/core": "^2.1",
     "contao-community-alliance/dc-general": "^2.1",
-    "cyberspectrum/i18n-metamodels": "^1.0.0@dev"
+    "contao/manager-plugin": "^2.6.0",
+    "cyberspectrum/i18n-metamodels": "dev-fix/phpcq-2 as 1.0.0@dev",
+    "metamodels/core": "^2.1",
+    "phpcq/runner-bootstrap": "^1.0@dev"
   },
   "suggest": {
     "cyberspectrum/i18n-metamodels": "For MetaModels support"
@@ -58,10 +58,17 @@
       "CyberSpectrum\\I18N\\ContaoBundle\\Test\\": "tests"
     }
   },
+  "config": {
+    "allow-plugins": {
+      "contao-components/installer": false,
+      "composer/package-versions-deprecated": true,
+      "contao/manager-plugin": true
+    }
+  },
   "extra": {
-    "contao-manager-plugin": "CyberSpectrum\\I18N\\ContaoBundle\\ContaoManager\\Plugin",
     "branch-alias": {
       "dev-master": "1.0.x-dev"
-    }
+    },
+    "contao-manager-plugin": "CyberSpectrum\\I18N\\ContaoBundle\\ContaoManager\\Plugin"
   }
 }
