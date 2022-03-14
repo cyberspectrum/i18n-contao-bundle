@@ -4,6 +4,7 @@ services:
       - '@database_connection'
       - '@CyberSpectrum\I18N\Contao\ExtractorFactory'
       - '@cyberspectrum_i18n.contao.default_map_builder'
+      - []
     calls:
       - method: 'setLogger'
         arguments: ['@logger']
@@ -36,7 +37,7 @@ services:
 
   CyberSpectrum\I18N\ContaoBundle\Controller\ContaoInspectProblemsController:
     arguments:
-      - '@templating'
+      - '@twig'
       - '@cyberspectrum_i18n.contao.default_map_builder'
       - '@contao.csrf.token_manager'
       - '%contao.csrf_token_name%'
