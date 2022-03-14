@@ -21,10 +21,10 @@
     "source": "https://github.com/cyberspectrum/i18n-contao-bundle"
   },
   "require": {
-    "php": "^7.1.3",
+    "php": "^7.4 || ^8.0",
     "ext-hash": "*",
     "ext-json": "*",
-    "contao/core-bundle": "^4.4.0",
+    "contao/core-bundle": "^4.9.0",
     "cyberspectrum/i18n": "dev-fix/phpcq-2 as 1.0.0@dev",
     "cyberspectrum/i18n-bundle": "dev-fix/phpcq-2 as 1.0.0@dev",
     "cyberspectrum/i18n-contao": "dev-fix/phpcq-2 as 1.0.0@dev",
