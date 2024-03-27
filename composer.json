@@ -30,8 +30,8 @@
     "cyberspectrum/i18n-contao": "^1.1@dev",
     "cyberspectrum/i18n-xliff": "^1.1@dev",
     "psr/log": "^2.0 || ^3.0",
-    "symfony/config": "^5.4",
-    "symfony/console": "^5.4",
+    "symfony/config": "^5.4 || ^6.0",
+    "symfony/console": "^5.4 || ^6.0",
     "symfony/dependency-injection": "^5.4 || ^6.0",
     "symfony/error-handler": "^5.4 || ^6.0",
     "symfony/form": "^5.4 || ^6.0",
@@ -45,8 +45,9 @@
   },
   "require-dev": {
     "contao-community-alliance/dc-general": "^2.3",
-    "contao/manager-plugin": "^4.13.0, <5.0",
+    "contao/manager-plugin": "^2.0",
     "cyberspectrum/i18n-metamodels": "^1.1@dev",
+    "metamodels/core": "^2.3.0@dev",
     "phpcq/runner-bootstrap": "^1.0@dev"
   },
   "suggest": {
@@ -66,7 +67,8 @@
     "allow-plugins": {
       "contao-components/installer": false,
       "composer/package-versions-deprecated": true,
-      "contao/manager-plugin": true
+      "contao/manager-plugin": true,
+      "php-http/discovery": true
     }
   },
   "extra": {
