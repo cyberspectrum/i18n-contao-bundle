@@ -21,32 +21,33 @@
     "source": "https://github.com/cyberspectrum/i18n-contao-bundle"
   },
   "require": {
-    "php": "^7.4 || ^8.0",
+    "php": "^8.1",
     "ext-hash": "*",
     "ext-json": "*",
-    "contao/core-bundle": "^4.9.0",
-    "cyberspectrum/i18n": "dev-fix/phpcq-2 as 1.0.0@dev",
-    "cyberspectrum/i18n-bundle": "dev-fix/phpcq-2 as 1.0.0@dev",
-    "cyberspectrum/i18n-contao": "dev-fix/phpcq-2 as 1.0.0@dev",
-    "cyberspectrum/i18n-xliff": "dev-fix/phpcq-2 as 1.0.0@dev",
-    "psr/log": "^1.1.4 || ^2.0 || ^3.0",
-    "symfony/config": "^3.4 || ^4.1 || ^5.0",
-    "symfony/console": "^3.4 || ^4.1 || ^5.0",
-    "symfony/dependency-injection": "^4.4 || ^5.4 || ^6.0",
-    "symfony/error-handler": "^4.4 || ^5.4 || ^6.0",
-    "symfony/form": "^4.4 || ^5.4 || ^6.0",
-    "symfony/framework-bundle": "^4.4 || ^5.4 || ^6.0",
-    "symfony/http-foundation": "^4.4 || ^5.4 || ^6.0",
-    "symfony/http-kernel": "^4.4 || ^5.4 || ^6.0",
-    "symfony/options-resolver": "^4.4 || ^5.4 || ^6.0",
-    "symfony/routing": "^4.4 || ^5.4 || ^6.0",
-    "symfony/security-csrf": "^4.4 || ^5.4 || ^6.0",
-    "symfony/templating": "^4.4 || ^5.4 || ^6.0"
+    "contao/core-bundle": "^4.13.0 <5.0",
+    "cyberspectrum/i18n": "^1.1@dev",
+    "cyberspectrum/i18n-bundle": "^1.1@dev",
+    "cyberspectrum/i18n-contao": "^1.1@dev",
+    "cyberspectrum/i18n-xliff": "^1.1@dev",
+    "psr/log": "^2.0 || ^3.0",
+    "symfony/config": "^5.4 || ^6.0",
+    "symfony/console": "^5.4 || ^6.0",
+    "symfony/dependency-injection": "^5.4 || ^6.0",
+    "symfony/error-handler": "^5.4 || ^6.0",
+    "symfony/form": "^5.4 || ^6.0",
+    "symfony/framework-bundle": "^5.4 || ^6.0",
+    "symfony/http-foundation": "^5.4 || ^6.0",
+    "symfony/http-kernel": "^5.4 || ^6.0",
+    "symfony/options-resolver": "^5.4 || ^6.0",
+    "symfony/routing": "^5.4 || ^6.0",
+    "symfony/security-csrf": "^5.4 || ^6.0",
+    "symfony/templating": "^5.4 || ^6.0"
   },
   "require-dev": {
-    "contao-community-alliance/dc-general": "^2.1",
-    "contao/manager-plugin": "^2.10.1",
-    "cyberspectrum/i18n-metamodels": "dev-fix/phpcq-2 as 1.0.0@dev",
+    "contao-community-alliance/dc-general": "^2.3",
+    "contao/manager-plugin": "^2.0",
+    "cyberspectrum/i18n-metamodels": "^1.1@dev",
+    "metamodels/core": "^2.3.0@dev",
     "phpcq/runner-bootstrap": "^1.0@dev"
   },
   "suggest": {
@@ -66,12 +67,13 @@
     "allow-plugins": {
       "contao-components/installer": false,
       "composer/package-versions-deprecated": true,
-      "contao/manager-plugin": true
+      "contao/manager-plugin": true,
+      "php-http/discovery": true
     }
   },
   "extra": {
     "branch-alias": {
-      "dev-master": "1.0.x-dev"
+      "dev-fix/phpcq-2": "1.1.x-dev"
     },
     "contao-manager-plugin": "CyberSpectrum\\I18N\\ContaoBundle\\ContaoManager\\Plugin"
   }
