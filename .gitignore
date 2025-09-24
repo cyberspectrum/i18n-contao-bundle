@@ -1,6 +1,8 @@
-vendor/
-composer.lock
+/vendor/
+/composer.lock
 
-.phpcq
-phpunit.xml
-.phpunit.result.cache
+/.phpcq/*
+/phpunit.xml
+/.phpunit.result.cache
+/.cache/*
+/.pdepend/*
