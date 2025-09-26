@@ -19,6 +19,7 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
  */
 class CyberSpectrumI18NContaoBundle extends Bundle
 {
+    #[\Override]
     public function build(ContainerBuilder $container): void
     {
         parent::build($container);

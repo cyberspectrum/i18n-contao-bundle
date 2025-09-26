@@ -12,6 +12,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  */
 class UpdateForRockSolidCustomElementPass implements CompilerPassInterface
 {
+    #[\Override]
     public function process(ContainerBuilder $container): void
     {
         $extractor = $container->getDefinition('cyberspectrum_i18n.contao.extractor.tl_content.headline');

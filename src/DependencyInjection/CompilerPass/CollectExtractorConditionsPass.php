@@ -43,6 +43,7 @@ class CollectExtractorConditionsPass implements CompilerPassInterface
      *
      * @throws RuntimeException When a tag has no table name.
      */
+    #[\Override]
     public function process(ContainerBuilder $container): void
     {
         if ([] === $services = $container->findTaggedServiceIds(self::TAG_CONTAO_EXTRACTOR_CONDITION)) {

@@ -15,6 +15,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  */
 class SetDefaultsPass implements CompilerPassInterface
 {
+    #[\Override]
     public function process(ContainerBuilder $container): void
     {
         if ($container->has(ContaoDictionaryProvider::class)) {

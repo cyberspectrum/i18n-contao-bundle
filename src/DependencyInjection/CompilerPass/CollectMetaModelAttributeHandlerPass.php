@@ -18,6 +18,7 @@ class CollectMetaModelAttributeHandlerPass implements CompilerPassInterface
      */
     public const TAG_ATTRIBUTE_HANDLER_FACTORY = 'cyberspectrum_i18n.metamodels.attribute_handler';
 
+    #[\Override]
     public function process(ContainerBuilder $container): void
     {
         if (!$container->hasDefinition('cyberspectrum_i18n.metamodels.attribute_handler_factories')) {

@@ -30,6 +30,7 @@ class RegisterDictionaryTypesPass implements CompilerPassInterface
      *
      * @throws RuntimeException When a tag has no provider name or multiple services have been registered.
      */
+    #[\Override]
     public function process(ContainerBuilder $container): void
     {
         $builders = ['contao' => new Reference(ContaoDictionaryDefinitionBuilder::class)];

@@ -37,6 +37,7 @@ class InspectMappingFormType extends AbstractType
     /**
      * {@inheritDoc}
      */
+    #[\Override]
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $languages = [];
@@ -53,6 +54,7 @@ class InspectMappingFormType extends AbstractType
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
@@ -61,6 +63,7 @@ class InspectMappingFormType extends AbstractType
         ]);
     }
 
+    #[\Override]
     public function getBlockPrefix(): string
     {
         return '';

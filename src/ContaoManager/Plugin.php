@@ -27,6 +27,7 @@ class Plugin implements BundlePluginInterface, ConfigPluginInterface, RoutingPlu
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     public function getBundles(ParserInterface $parser): array
     {
         return [
@@ -46,6 +47,7 @@ class Plugin implements BundlePluginInterface, ConfigPluginInterface, RoutingPlu
     /**
      * {@inheritDoc}
      */
+    #[\Override]
     public function registerContainerConfiguration(LoaderInterface $loader, array $managerConfig): void
     {
         $loader->load('@CyberSpectrumI18NContaoBundle/Resources/contao-manager/framework.yml');
@@ -57,6 +59,7 @@ class Plugin implements BundlePluginInterface, ConfigPluginInterface, RoutingPlu
      * @psalm-suppress MixedInferredReturnType
      * @psalm-suppress MixedReturnStatement
      */
+    #[\Override]
     public function getRouteCollection(LoaderResolverInterface $resolver, KernelInterface $kernel): ?RouteCollection
     {
         $loader = $resolver->resolve(__DIR__ . '/../Resources/config/contao/routing.yml');

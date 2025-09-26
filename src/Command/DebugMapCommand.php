@@ -30,6 +30,7 @@ class DebugMapCommand extends Command
         $this->mapBuilder = $mapBuilder;
     }
 
+    #[\Override]
     protected function configure(): void
     {
         parent::configure();
@@ -41,6 +42,7 @@ class DebugMapCommand extends Command
         $this->addArgument('target-language', InputArgument::REQUIRED, 'The target language');
     }
 
+    #[\Override]
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $tableName = $input->getArgument('table');

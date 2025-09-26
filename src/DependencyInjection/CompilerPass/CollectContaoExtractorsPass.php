@@ -29,6 +29,7 @@ class CollectContaoExtractorsPass implements CompilerPassInterface
      *
      * @throws RuntimeException When a tag has no table name.
      */
+    #[\Override]
     public function process(ContainerBuilder $container): void
     {
         if (!$container->has(ExtractorFactory::class)) {
