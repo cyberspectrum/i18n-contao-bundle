@@ -19,7 +19,7 @@ use function in_array;
 /**
  * This is the class that loads and manages the bundle configuration
  */
-class CyberSpectrumI18NContaoExtension extends Extension
+final class CyberSpectrumI18NContaoExtension extends Extension
 {
     /**
      * {@inheritDoc}

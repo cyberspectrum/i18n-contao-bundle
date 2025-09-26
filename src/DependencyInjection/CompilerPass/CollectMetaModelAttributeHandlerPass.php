@@ -11,7 +11,7 @@ use Symfony\Component\DependencyInjection\Reference;
 /**
  * This pass adds the tagged handler factories to the MetaModels handler factory.
  */
-class CollectMetaModelAttributeHandlerPass implements CompilerPassInterface
+final class CollectMetaModelAttributeHandlerPass implements CompilerPassInterface
 {
     /**
      * The tag name to use for attribute handler factories.

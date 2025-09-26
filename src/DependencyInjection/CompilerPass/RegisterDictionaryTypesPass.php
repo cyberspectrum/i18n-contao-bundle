@@ -19,7 +19,7 @@ use function is_array;
 /**
  * This pass adds dictionary builders.
  */
-class RegisterDictionaryTypesPass implements CompilerPassInterface
+final class RegisterDictionaryTypesPass implements CompilerPassInterface
 {
     /**
      * Collect all tagged dictionary providers.

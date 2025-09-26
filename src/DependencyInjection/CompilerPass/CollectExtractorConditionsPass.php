@@ -28,7 +28,7 @@ use function sprintf;
 /**
  * This pass adds tagged services to the various factories.
  */
-class CollectExtractorConditionsPass implements CompilerPassInterface
+final class CollectExtractorConditionsPass implements CompilerPassInterface
 {
     /** The tag name to use for attribute factories. */
     public const TAG_CONTAO_EXTRACTOR_CONDITION = 'cyberspectrum_i18n.contao_condition';

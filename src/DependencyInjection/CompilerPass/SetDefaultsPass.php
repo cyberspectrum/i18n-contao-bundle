@@ -13,7 +13,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 /**
  * This pass updates the services to have sane default services.
  */
-class SetDefaultsPass implements CompilerPassInterface
+final class SetDefaultsPass implements CompilerPassInterface
 {
     #[\Override]
     public function process(ContainerBuilder $container): void

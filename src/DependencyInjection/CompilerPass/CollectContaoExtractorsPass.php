@@ -15,7 +15,7 @@ use function array_key_exists;
 /**
  * This pass adds tagged services to the various factories.
  */
-class CollectContaoExtractorsPass implements CompilerPassInterface
+final class CollectContaoExtractorsPass implements CompilerPassInterface
 {
     /**
      * The tag name to use for attribute factories.

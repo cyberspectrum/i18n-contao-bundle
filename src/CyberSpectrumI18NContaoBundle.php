@@ -17,7 +17,7 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 /**
  * This provides the bundle entry point.
  */
-class CyberSpectrumI18NContaoBundle extends Bundle
+final class CyberSpectrumI18NContaoBundle extends Bundle
 {
     #[\Override]
     public function build(ContainerBuilder $container): void

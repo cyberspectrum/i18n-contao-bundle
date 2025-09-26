@@ -21,7 +21,7 @@ use function strtr;
 /**
  * This allows to inspect dictionary problems in the Contao backend.
  */
-class ContaoInspectProblemsController extends AbstractController
+final class ContaoInspectProblemsController extends AbstractController
 {
     /** The twig engine. */
     private EngineInterface $templating;

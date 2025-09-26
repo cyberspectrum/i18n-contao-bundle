@@ -14,7 +14,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * This class aids in debugging a map.
  */
-class DebugMapCommand extends Command
+final class DebugMapCommand extends Command
 {
     /** The map builder. */
     private MapBuilderInterface $mapBuilder;

@@ -10,7 +10,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 /**
  * This pass updates the extractors for usage with rocksolid custom elements.
  */
-class UpdateForRockSolidCustomElementPass implements CompilerPassInterface
+final class UpdateForRockSolidCustomElementPass implements CompilerPassInterface
 {
     #[\Override]
     public function process(ContainerBuilder $container): void

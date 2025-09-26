@@ -14,7 +14,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * This form type helps selecting the map for problem inspection.
  */
-class InspectMappingFormType extends AbstractType
+final class InspectMappingFormType extends AbstractType
 {
     /** The Contao map builder. */
     private MapBuilderInterface $mapBuilder;
