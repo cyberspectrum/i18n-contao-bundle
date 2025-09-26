@@ -65,11 +65,12 @@
   },
   "config": {
     "allow-plugins": {
-      "contao-components/installer": false,
       "composer/package-versions-deprecated": true,
+      "contao-components/installer": false,
       "contao/manager-plugin": true,
       "php-http/discovery": true
-    }
+    },
+    "sort-packages": true
   },
   "extra": {
     "branch-alias": {
