@@ -21,6 +21,8 @@ use Symfony\Component\Routing\RouteCollection;
 
 /**
  * Plugin for the Contao Manager.
+ *
+ * @api
  */
 final class Plugin implements BundlePluginInterface, ConfigPluginInterface, RoutingPluginInterface
 {

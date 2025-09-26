@@ -46,15 +46,13 @@ final class CollectExtractorConditionsPass implements CompilerPassInterface
     #[\Override]
     public function process(ContainerBuilder $container): void
     {
+        /** @var array<string, list<array<array-key, mixed>>> $services */
         if ([] === $services = $container->findTaggedServiceIds(self::TAG_CONTAO_EXTRACTOR_CONDITION)) {
             return;
         }
 
-        /**
-         * @var string $serviceId
-         * @var list<array{type?: string}> $tags
-         */
         foreach ($services as $serviceId => $tags) {
+            /** @var array<array-key, mixed> $tag */
             foreach ($tags as $tag) {
                 $this->handleTag($serviceId, $tag, $container);
             }
@@ -140,8 +138,9 @@ final class CollectExtractorConditionsPass implements CompilerPassInterface
     private function ensureConditionalService(string $serviceId, ContainerBuilder $container): Definition
     {
         $definition = $container->getDefinition($serviceId);
+        $class = $definition->getClass();
         if (
-            (null === ($class = $definition->getClass()))
+            (null === $class)
             || $this->classImplements($class, ConditionalExtractorInterface::class)
         ) {
             return $definition;
@@ -191,7 +190,7 @@ final class CollectExtractorConditionsPass implements CompilerPassInterface
      */
     private function classImplements(string $class, string $interface): bool
     {
-        return in_array($interface, class_implements($class), true);
+        return in_array($interface, (array) class_implements($class), true);
     }
 
     /**
@@ -232,6 +231,6 @@ final class CollectExtractorConditionsPass implements CompilerPassInterface
             default:
         }
 
-        throw new RuntimeException('Unknown condition tag: ' . json_encode($tag));
+        throw new RuntimeException('Unknown condition tag: ' . json_encode($tag, JSON_THROW_ON_ERROR));
     }
 }

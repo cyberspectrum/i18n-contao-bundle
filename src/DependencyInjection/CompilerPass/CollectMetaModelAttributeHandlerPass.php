@@ -29,13 +29,10 @@ final class CollectMetaModelAttributeHandlerPass implements CompilerPassInterfac
         $factories   = $factoryList->getArgument(0);
         assert(\is_array($factories));
 
-        /**
-         * @var string $serviceId
-         * @var list<array{type?: string}> $tags
-         */
+        /** @var list<array{type?: string}> $tags */
         foreach ($container->findTaggedServiceIds(self::TAG_ATTRIBUTE_HANDLER_FACTORY) as $serviceId => $tags) {
             foreach ($tags as $tag) {
-                if ($type = ($tag['type'] ?? null)) {
+                if (null !== ($type = ($tag['type'] ?? null))) {
                     $factories[$type] = new Reference($serviceId);
                 }
             }

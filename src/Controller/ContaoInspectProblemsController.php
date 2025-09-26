@@ -80,10 +80,9 @@ final class ContaoInspectProblemsController extends AbstractController
      */
     private function inspectMap(Request $request): Response
     {
-        if (empty($map = $request->query->get('map'))) {
+        if ('' === ($map = (string) $request->query->get('map'))) {
             $map = 'tl_page';
         }
-        assert(is_string($map));
 
         $form = $this->createForm(InspectMappingFormType::class);
         $form->handleRequest($request);

@@ -44,10 +44,7 @@ final class CollectContaoExtractorsPass implements CompilerPassInterface
         $extractorContainer = $container->getDefinition('cyberspectrum_i18n.contao.extractor_container');
         /** @var array<string, Reference> $extractorList */
         $extractorList = $extractorContainer->getArgument(0);
-        /**
-         * @var string $serviceId
-         * @var list<array{table?: string}> $tags
-         */
+        /** @var list<array{table?: string}> $tags */
         foreach ($services as $serviceId => $tags) {
             foreach ($tags as $tag) {
                 if (!array_key_exists('table', $tag)) {

@@ -10,4 +10,12 @@
     <projectFiles>
         <directory name="src" />
     </projectFiles>
+    <issueHandlers>
+        <UnusedClass>
+            <errorLevel type="suppress">
+                <!-- Loaded via symfony bundle -->
+                <referencedClass name="CyberSpectrum\I18N\ContaoBundle\DependencyInjection\CyberSpectrumI18NContaoExtension"/>
+            </errorLevel>
+        </UnusedClass>
+    </issueHandlers>
 </psalm>
