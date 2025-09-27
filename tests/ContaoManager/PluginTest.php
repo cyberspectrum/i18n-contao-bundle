@@ -66,12 +66,12 @@ class PluginTest extends TestCase
         $resolver
             ->expects($this->once())
             ->method('resolve')
-            ->with($basePath . '/../Resources/config/contao/routing.yml')
+            ->with($basePath . '/../Resources/config/contao/routing.php')
             ->willReturn($loader);
         $loader
             ->expects($this->once())
             ->method('load')
-            ->with($basePath . '/../Resources/config/contao/routing.yml')
+            ->with($basePath . '/../Resources/config/contao/routing.php')
             ->willReturn($collection = $this->getMockBuilder(RouteCollection::class)->getMock());
 
         self::assertSame($collection, $plugin->getRouteCollection(

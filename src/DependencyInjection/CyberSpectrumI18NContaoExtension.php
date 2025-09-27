@@ -10,7 +10,7 @@ use MetaModels\CoreBundle\MetaModelsCoreBundle;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
-use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 use Terminal42\ChangeLanguage\Terminal42ChangeLanguageBundle;
 
 use function array_key_exists;
@@ -27,23 +27,24 @@ final class CyberSpectrumI18NContaoExtension extends Extension
     #[\Override]
     public function load(array $configs, ContainerBuilder $container): void
     {
-        $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
-        $loader->load('contao/services.yml');
-        $loader->load('contao/extractor.yml');
+        $loader = new PhpFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
+        $loader->load('contao/services.php');
+        $loader->load('contao/extractor.php');
+
         /** @psalm-suppress UndefinedClass - we do not need this class, this check is for feature detection only */
         if ($this->hasBundle(RockSolidCustomElementsBundle::class, $container)) {
-            $loader->load('contao/rock-solid-custom-elements.yml');
+            $loader->load('contao/rock-solid-custom-elements.php');
         }
         /** @psalm-suppress UndefinedClass - we do not need this class, this check is for feature detection only */
         if (
             $this->hasBundle('changelanguage', $container)
             || $this->hasBundle(Terminal42ChangeLanguageBundle::class, $container)
         ) {
-            $loader->load('contao/terminal42-change-language.yml');
+            $loader->load('contao/terminal42-change-language.php');
         }
         // Only activate if MetaModels bundle present.
         if ($this->hasBundle(MetaModelsCoreBundle::class, $container)) {
-            $loader->load('metamodels.yml');
+            $loader->load('metamodels.php');
         }
     }
 

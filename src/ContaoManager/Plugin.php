@@ -64,13 +64,13 @@ final class Plugin implements BundlePluginInterface, ConfigPluginInterface, Rout
     #[\Override]
     public function getRouteCollection(LoaderResolverInterface $resolver, KernelInterface $kernel): ?RouteCollection
     {
-        $loader = $resolver->resolve(__DIR__ . '/../Resources/config/contao/routing.yml');
+        $loader = $resolver->resolve(__DIR__ . '/../Resources/config/contao/routing.php');
 
         if (!$loader instanceof LoaderInterface) {
             throw new \RuntimeException('Failed to load routes');
         }
 
         return $loader
-            ->load(__DIR__ . '/../Resources/config/contao/routing.yml');
+            ->load(__DIR__ . '/../Resources/config/contao/routing.php');
     }
 }

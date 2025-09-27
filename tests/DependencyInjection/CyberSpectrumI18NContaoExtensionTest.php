@@ -59,11 +59,11 @@ class CyberSpectrumI18NContaoExtensionTest extends TestCase
 
         // Assert we get all files loaded.
         self::assertSame([
-            realpath(__DIR__ . '/../../src/Resources/config/contao/services.yml'),
-            realpath(__DIR__ . '/../../src/Resources/config/contao/extractor.yml'),
-            realpath(__DIR__ . '/../../src/Resources/config/contao/rock-solid-custom-elements.yml'),
-            realpath(__DIR__ . '/../../src/Resources/config/contao/terminal42-change-language.yml'),
-            realpath(__DIR__ . '/../../src/Resources/config/metamodels.yml'),
+            realpath(__DIR__ . '/../../src/Resources/config/contao/services.php'),
+            realpath(__DIR__ . '/../../src/Resources/config/contao/extractor.php'),
+            realpath(__DIR__ . '/../../src/Resources/config/contao/rock-solid-custom-elements.php'),
+            realpath(__DIR__ . '/../../src/Resources/config/contao/terminal42-change-language.php'),
+            realpath(__DIR__ . '/../../src/Resources/config/metamodels.php'),
         ], $files);
 
         $container->compile();
@@ -89,8 +89,8 @@ class CyberSpectrumI18NContaoExtensionTest extends TestCase
         }
 
         self::assertSame([
-            realpath(__DIR__ . '/../../src/Resources/config/contao/services.yml'),
-            realpath(__DIR__ . '/../../src/Resources/config/contao/extractor.yml'),
+            realpath(__DIR__ . '/../../src/Resources/config/contao/services.php'),
+            realpath(__DIR__ . '/../../src/Resources/config/contao/extractor.php'),
         ], $files);
     }
 }
