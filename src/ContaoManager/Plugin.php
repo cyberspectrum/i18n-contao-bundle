@@ -9,22 +9,18 @@ use Contao\ManagerPlugin\Bundle\BundlePluginInterface;
 use Contao\ManagerPlugin\Bundle\Config\BundleConfig;
 use Contao\ManagerPlugin\Bundle\Parser\ParserInterface;
 use Contao\ManagerPlugin\Config\ConfigPluginInterface;
-use Contao\ManagerPlugin\Routing\RoutingPluginInterface;
 use CyberSpectrum\I18NBundle\CyberSpectrumI18NBundle;
 use CyberSpectrum\I18N\ContaoBundle\CyberSpectrumI18NContaoBundle;
 use MetaModels\CoreBundle\MetaModelsCoreBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Component\Config\Loader\LoaderInterface;
-use Symfony\Component\Config\Loader\LoaderResolverInterface;
-use Symfony\Component\HttpKernel\KernelInterface;
-use Symfony\Component\Routing\RouteCollection;
 
 /**
  * Plugin for the Contao Manager.
  *
  * @api
  */
-final class Plugin implements BundlePluginInterface, ConfigPluginInterface, RoutingPluginInterface
+final class Plugin implements BundlePluginInterface, ConfigPluginInterface
 {
     /**
      * {@inheritdoc}
@@ -53,24 +49,5 @@ final class Plugin implements BundlePluginInterface, ConfigPluginInterface, Rout
     public function registerContainerConfiguration(LoaderInterface $loader, array $managerConfig): void
     {
         $loader->load('@CyberSpectrumI18NContaoBundle/Resources/contao-manager/framework.yml');
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * @psalm-suppress MixedInferredReturnType
-     * @psalm-suppress MixedReturnStatement
-     */
-    #[\Override]
-    public function getRouteCollection(LoaderResolverInterface $resolver, KernelInterface $kernel): ?RouteCollection
-    {
-        $loader = $resolver->resolve(__DIR__ . '/../Resources/config/contao/routing.php');
-
-        if (!$loader instanceof LoaderInterface) {
-            throw new \RuntimeException('Failed to load routes');
-        }
-
-        return $loader
-            ->load(__DIR__ . '/../Resources/config/contao/routing.php');
     }
 }

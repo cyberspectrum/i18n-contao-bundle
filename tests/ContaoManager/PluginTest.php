@@ -56,27 +56,4 @@ class PluginTest extends TestCase
 
         $plugin->registerContainerConfiguration($loader, []);
     }
-
-    public function testGetRouteCollection(): void
-    {
-        $plugin   = new Plugin();
-        $resolver = $this->getMockForAbstractClass(LoaderResolverInterface::class);
-        $loader   = $this->getMockForAbstractClass(LoaderInterface::class);
-        $basePath = realpath(__DIR__ . '/../../src/ContaoManager');
-        $resolver
-            ->expects($this->once())
-            ->method('resolve')
-            ->with($basePath . '/../Resources/config/contao/routing.php')
-            ->willReturn($loader);
-        $loader
-            ->expects($this->once())
-            ->method('load')
-            ->with($basePath . '/../Resources/config/contao/routing.php')
-            ->willReturn($collection = $this->getMockBuilder(RouteCollection::class)->getMock());
-
-        self::assertSame($collection, $plugin->getRouteCollection(
-            $resolver,
-            $this->getMockForAbstractClass(KernelInterface::class)
-        ));
-    }
 }

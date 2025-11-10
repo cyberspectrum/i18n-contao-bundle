@@ -6,8 +6,6 @@ use CyberSpectrum\I18N\Contao\ContaoDictionaryDefinitionBuilder;
 use CyberSpectrum\I18N\Contao\ContaoDictionaryProvider;
 use CyberSpectrum\I18N\Contao\ExtractorFactory;
 use CyberSpectrum\I18N\ContaoBundle\Command\DebugMapCommand;
-use CyberSpectrum\I18N\ContaoBundle\Controller\ContaoInspectProblemsController;
-use CyberSpectrum\I18N\ContaoBundle\FormType\InspectMappingFormType;
 use CyberSpectrum\I18NBundle\DependencyInjection\CompilerPass\CollectDictionaryProvidersPass;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\DependencyInjection\ServiceLocator;
@@ -43,20 +41,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     $services->set(ContaoDictionaryDefinitionBuilder::class);
 
-    $services->set(InspectMappingFormType::class)
-        ->arg('$mapBuilder', service('cyberspectrum_i18n.contao.default_map_builder'))
-        ->arg('$tokenName', param('contao.csrf_token_name'))
-        ->tag('form.type');
-
-
     $services->set(DebugMapCommand::class)
             ->arg('$mapBuilder', service('cyberspectrum_i18n.contao.default_map_builder'))
             ->tag('console.command');
-
-    $services->set(ContaoInspectProblemsController::class)
-        ->arg('$templating', service('twig'))
-        ->arg('$mapBuilder', service('cyberspectrum_i18n.contao.default_map_builder'))
-        ->arg('$csrfTokenManager', service('contao.csrf.token_manager'))
-        ->arg('$csrfTokenName', param('contao.csrf_token_name'))
-        ->tag('controller.service_arguments');
 };
