@@ -30,6 +30,12 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->arg('$colName', 'pageTitle')
         ->tag(CollectContaoExtractorsPass::TAG_CONTAO_EXTRACTOR, ['table' => 'tl_page']);
 
+    
+    //// tl_page.description
+    $services->set('cyberspectrum_i18n.contao.extractor.tl_page.description', TextExtractor::class)
+        ->arg('$colName', 'description')
+        ->tag(CollectContaoExtractorsPass::TAG_CONTAO_EXTRACTOR, ['table' => 'tl_page']);
+    
     // Table tl_article
 
     //// tl_article.title
