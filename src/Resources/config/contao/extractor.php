@@ -98,4 +98,31 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             CollectExtractorConditionsPass::TAG_CONTAO_EXTRACTOR_CONDITION,
             ['type' => 'expression', 'expression' => 'row.type in [\'accordionStart\', \'accordionSingle\']']
         );
+
+    // tl_files.meta
+
+    //// tl_files.meta.alt
+    $services->set('cyberspectrum_i18n.contao.extractor.tl_files.meta.alt', TextExtractor::class)
+        ->arg('$colName', 'alt')
+        ->tag(CollectContaoExtractorsPass::TAG_CONTAO_EXTRACTOR, ['table' => 'tl_files']);
+
+    //// tl_files.meta.caption
+    $services->set('cyberspectrum_i18n.contao.extractor.tl_files.meta.caption', TextExtractor::class)
+        ->arg('$colName', 'caption')
+        ->tag(CollectContaoExtractorsPass::TAG_CONTAO_EXTRACTOR, ['table' => 'tl_files']);
+
+    //// tl_files.meta.license
+    $services->set('cyberspectrum_i18n.contao.extractor.tl_files.meta.license', TextExtractor::class)
+        ->arg('$colName', 'license')
+        ->tag(CollectContaoExtractorsPass::TAG_CONTAO_EXTRACTOR, ['table' => 'tl_files']);
+
+    //// tl_files.meta.link
+    $services->set('cyberspectrum_i18n.contao.extractor.tl_files.meta.link', TextExtractor::class)
+        ->arg('$colName', 'link')
+        ->tag(CollectContaoExtractorsPass::TAG_CONTAO_EXTRACTOR, ['table' => 'tl_files']);
+
+    //// tl_files.meta.title
+    $services->set('cyberspectrum_i18n.contao.extractor.tl_files.meta.title', TextExtractor::class)
+        ->arg('$colName', 'title')
+        ->tag(CollectContaoExtractorsPass::TAG_CONTAO_EXTRACTOR, ['table' => 'tl_files']);
 };
