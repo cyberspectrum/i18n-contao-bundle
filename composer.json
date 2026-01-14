@@ -66,10 +66,10 @@
   },
   "config": {
     "allow-plugins": {
-      "composer/package-versions-deprecated": true,
+      "composer/package-versions-deprecated": false,
       "contao-components/installer": false,
-      "contao/manager-plugin": true,
-      "php-http/discovery": true
+      "contao/manager-plugin": false,
+      "php-http/discovery": false
     },
     "sort-packages": true
   },
