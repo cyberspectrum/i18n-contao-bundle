@@ -42,7 +42,7 @@
     "symfony/options-resolver": "^5.4 || ^6.0",
     "symfony/routing": "^5.4 || ^6.0",
     "symfony/security-csrf": "^5.4 || ^6.0",
-    "twig/twig": "^3.21"
+    "twig/twig": "^3.22"
   },
   "require-dev": {
     "contao-community-alliance/dc-general": "^2.3",
