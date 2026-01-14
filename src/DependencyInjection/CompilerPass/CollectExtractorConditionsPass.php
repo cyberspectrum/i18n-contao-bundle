@@ -1,23 +1,6 @@
 <?php
 
-/**
- * This file is part of cyberspectrum/i18n-contao-bundle.
- *
- * (c) 2018 CyberSpectrum.
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- *
- * This project is provided in good faith and hope to be usable by anyone.
- *
- * @package    cyberspectrum/i18n-contao-bundle
- * @author     Christian Schiffler <c.schiffler@cyberspectrum.de>
- * @copyright  2018 CyberSpectrum.
- * @license    https://github.com/cyberspectrum/i18n-contao-bundle/blob/master/LICENSE MIT
- * @filesource
- */
-
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace CyberSpectrum\I18N\ContaoBundle\DependencyInjection\CompilerPass;
 
@@ -28,26 +11,29 @@ use CyberSpectrum\I18N\Contao\Extractor\ConditionalMultiStringExtractor;
 use CyberSpectrum\I18N\Contao\Extractor\ConditionalStringExtractor;
 use CyberSpectrum\I18N\Contao\Extractor\MultiStringExtractorInterface;
 use CyberSpectrum\I18N\Contao\Extractor\StringExtractorInterface;
+use RuntimeException;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
 
+use function array_merge;
+use function array_slice;
+use function assert;
+use function in_array;
+use function is_array;
+use function json_encode;
+use function sprintf;
+
 /**
  * This pass adds tagged services to the various factories.
  */
-class CollectExtractorConditionsPass implements CompilerPassInterface
+final class CollectExtractorConditionsPass implements CompilerPassInterface
 {
-    /**
-     * The tag name to use for attribute factories.
-     */
+    /** The tag name to use for attribute factories. */
     public const TAG_CONTAO_EXTRACTOR_CONDITION = 'cyberspectrum_i18n.contao_condition';
 
-    /**
-     * Id of the expression language to use.
-     *
-     * @var string
-     */
+    /** Id of the expression language to use. */
     private const EXPRESSION_LANGUAGE = 'cyberspectrum_i18n.expression_language';
 
     /**
@@ -55,17 +41,18 @@ class CollectExtractorConditionsPass implements CompilerPassInterface
      *
      * @param ContainerBuilder $container The container builder.
      *
-     * @return void
-     *
-     * @throws \RuntimeException When a tag has no table name.
+     * @throws RuntimeException When a tag has no table name.
      */
+    #[\Override]
     public function process(ContainerBuilder $container): void
     {
+        /** @var array<string, list<array<array-key, mixed>>> $services */
         if ([] === $services = $container->findTaggedServiceIds(self::TAG_CONTAO_EXTRACTOR_CONDITION)) {
             return;
         }
 
         foreach ($services as $serviceId => $tags) {
+            /** @var array<array-key, mixed> $tag */
             foreach ($tags as $tag) {
                 $this->handleTag($serviceId, $tag, $container);
             }
@@ -79,9 +66,7 @@ class CollectExtractorConditionsPass implements CompilerPassInterface
      * @param array            $tag       The tag content.
      * @param ContainerBuilder $container The container builder.
      *
-     * @return void
-     *
-     * @throws \RuntimeException On error.
+     * @throws RuntimeException On error.
      */
     private function handleTag(string $serviceId, array $tag, ContainerBuilder $container): void
     {
@@ -91,11 +76,13 @@ class CollectExtractorConditionsPass implements CompilerPassInterface
             return;
         }
 
+        /** @var list<Reference> $conditions */
         $conditions = [];
+        /** @var array{0: string, 1: list<mixed> } $call */
         foreach ($definition->getMethodCalls() as $call) {
             if ('setCondition' === $call[0]) {
                 if (!$call[1][0] instanceof Reference) {
-                    throw new \RuntimeException('Expected a reference as argument');
+                    throw new RuntimeException('Expected a reference as argument');
                 }
                 $conditions[] = $call[1][0];
             }
@@ -107,16 +94,16 @@ class CollectExtractorConditionsPass implements CompilerPassInterface
 
         // Scan if any of the conditions is a WhitelistCondition - if so, add all other to that one.
         foreach ($conditions as $index => $condition) {
-            /** @var Reference $condition */
-            $referenced = $container->getDefinition($condition);
+            $referenced = $container->getDefinition($condition->__toString());
             if ($referenced->getClass() === WhitelistCondition::class) {
                 $arguments = $referenced->getArgument(0);
+                assert(is_array($arguments));
 
                 $referenced->setArgument(
                     0,
                     array_merge(
-                        \array_slice($arguments, 0, $index),
-                        \array_slice($arguments, ($index + 1)),
+                        array_slice($arguments, 0, $index),
+                        array_slice($arguments, ($index + 1)),
                         [$newCondition]
                     )
                 );
@@ -146,12 +133,16 @@ class CollectExtractorConditionsPass implements CompilerPassInterface
      *
      * @return Definition
      *
-     * @throws \RuntimeException On error.
+     * @throws RuntimeException On error.
      */
     private function ensureConditionalService(string $serviceId, ContainerBuilder $container): Definition
     {
         $definition = $container->getDefinition($serviceId);
-        if ($this->classImplements($class = $definition->getClass(), ConditionalExtractorInterface::class)) {
+        $class = $definition->getClass();
+        if (
+            (null === $class)
+            || $this->classImplements($class, ConditionalExtractorInterface::class)
+        ) {
             return $definition;
         }
 
@@ -181,12 +172,14 @@ class CollectExtractorConditionsPass implements CompilerPassInterface
             default:
         }
 
-        throw new \RuntimeException(sprintf(
-            'Class %1$s does not implement %2$s - can not apply conditions (service: %3$s).',
-            $definition->getClass(),
-            ConditionalExtractorInterface::class,
-            $serviceId
-        ));
+        throw new RuntimeException(
+            sprintf(
+                'Class %1$s does not implement %2$s - can not apply conditions (service: %3$s).',
+                $definition->getClass() ?? '?',
+                ConditionalExtractorInterface::class,
+                $serviceId
+            )
+        );
     }
 
     /**
@@ -194,12 +187,10 @@ class CollectExtractorConditionsPass implements CompilerPassInterface
      *
      * @param string $class     The class to test.
      * @param string $interface The interface to test.
-     *
-     * @return bool
      */
     private function classImplements(string $class, string $interface): bool
     {
-        return \in_array($interface, class_implements($class), true);
+        return in_array($interface, (array) class_implements($class), true);
     }
 
     /**
@@ -211,12 +202,12 @@ class CollectExtractorConditionsPass implements CompilerPassInterface
      *
      * @return Reference
      *
-     * @throws \RuntimeException When the condition type is unknown.
+     * @throws RuntimeException When the condition type is unknown.
      */
     private function createCondition(string $serviceId, array $tag, ContainerBuilder $container): Reference
     {
         if (!isset($tag['type'])) {
-            throw new \RuntimeException(sprintf(
+            throw new RuntimeException(sprintf(
                 'No type given for condition of service: %1$s.',
                 $serviceId
             ));
@@ -225,7 +216,7 @@ class CollectExtractorConditionsPass implements CompilerPassInterface
         switch ($tag['type']) {
             case 'expression':
                 if (!isset($tag['expression'])) {
-                    throw new \RuntimeException('Expression missing in tag for: ' . $serviceId);
+                    throw new RuntimeException('Expression missing in tag for: ' . $serviceId);
                 }
                 $container->setDefinition(
                     $conditionId = 'cyberspectrum_i18n.contao.extractor.condition.' .
@@ -240,6 +231,6 @@ class CollectExtractorConditionsPass implements CompilerPassInterface
             default:
         }
 
-        throw new \RuntimeException('Unknown condition tag: ' . json_encode($tag));
+        throw new RuntimeException('Unknown condition tag: ' . json_encode($tag, JSON_THROW_ON_ERROR));
     }
 }

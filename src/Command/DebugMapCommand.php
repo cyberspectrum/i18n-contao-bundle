@@ -1,23 +1,6 @@
 <?php
 
-/**
- * This file is part of cyberspectrum/i18n-contao-bundle.
- *
- * (c) 2019 CyberSpectrum.
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- *
- * This project is provided in good faith and hope to be usable by anyone.
- *
- * @package    cyberspectrum/i18n-contao-bundle
- * @author     Christian Schiffler <c.schiffler@cyberspectrum.de>
- * @copyright  2019 CyberSpectrum.
- * @license    https://github.com/cyberspectrum/i18n-contao-bundle/blob/master/LICENSE MIT
- * @filesource
- */
-
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace CyberSpectrum\I18N\ContaoBundle\Command;
 
@@ -31,14 +14,10 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * This class aids in debugging a map.
  */
-class DebugMapCommand extends Command
+final class DebugMapCommand extends Command
 {
-    /**
-     * The map builder.
-     *
-     * @var MapBuilderInterface
-     */
-    private $mapBuilder;
+    /** The map builder. */
+    private MapBuilderInterface $mapBuilder;
 
     /**
      * Create a new instance.
@@ -51,28 +30,27 @@ class DebugMapCommand extends Command
         $this->mapBuilder = $mapBuilder;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     protected function configure(): void
     {
         parent::configure();
 
         $this->setName('debug:i18n-map');
         $this->setDescription('Dump the mapping');
-        $this->addArgument('table', InputArgument::OPTIONAL, 'The table name');
-        $this->addArgument('source-language', InputArgument::OPTIONAL, 'The source language');
-        $this->addArgument('target-language', InputArgument::OPTIONAL, 'The target language');
+        $this->addArgument('table', InputArgument::REQUIRED, 'The table name');
+        $this->addArgument('source-language', InputArgument::REQUIRED, 'The source language');
+        $this->addArgument('target-language', InputArgument::REQUIRED, 'The target language');
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    #[\Override]
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $tableName      = $input->getArgument('table');
+        $tableName = $input->getArgument('table');
+        assert(is_string($tableName));
         $sourceLanguage = $input->getArgument('source-language');
+        assert(is_string($sourceLanguage));
         $targetLanguage = $input->getArgument('target-language');
+        assert(is_string($targetLanguage));
 
         $tableMap = $this->mapBuilder->getMappingFor($tableName, $sourceLanguage, $targetLanguage);
         $keys     = $tableMap->sourceIds();
@@ -83,5 +61,7 @@ class DebugMapCommand extends Command
         }
 
         $table->render();
+
+        return 0;
     }
 }

@@ -1,23 +1,6 @@
 <?php
 
-/**
- * This file is part of cyberspectrum/i18n-contao-bundle.
- *
- * (c) 2018 CyberSpectrum.
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- *
- * This project is provided in good faith and hope to be usable by anyone.
- *
- * @package    cyberspectrum/i18n-contao-bundle
- * @author     Christian Schiffler <c.schiffler@cyberspectrum.de>
- * @copyright  2018 CyberSpectrum.
- * @license    https://github.com/cyberspectrum/i18n-contao-bundle/blob/master/LICENSE MIT
- * @filesource
- */
-
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace CyberSpectrum\I18N\ContaoBundle\Test\DependencyInjection;
 
@@ -25,15 +8,13 @@ use Contao\CoreBundle\HttpKernel\Bundle\ContaoModuleBundle;
 use CyberSpectrum\I18N\ContaoBundle\DependencyInjection\CyberSpectrumI18NContaoExtension;
 use MadeYourDay\RockSolidCustomElements\RockSolidCustomElementsBundle;
 use MetaModels\CoreBundle\MetaModelsCoreBundle;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Config\Resource\FileResource;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-/**
- * This tests the bundle.
- *
- * @covers \CyberSpectrum\I18N\ContaoBundle\DependencyInjection\CyberSpectrumI18NContaoExtension
- */
+/** This tests the bundle. */
+#[CoversClass(CyberSpectrumI18NContaoExtension::class)]
 class CyberSpectrumI18NContaoExtensionTest extends TestCase
 {
     public function testLoad(): void
@@ -68,19 +49,19 @@ class CyberSpectrumI18NContaoExtensionTest extends TestCase
                 $class = $serviceId;
             }
 
-            $this->assertTrue(
+            self::assertTrue(
                 class_exists($class) || interface_exists($class),
                 'Class ' . $class . ' does not exist for ' . $serviceId
             );
         }
 
         // Assert we get all files loaded.
-        $this->assertSame([
-            realpath(__DIR__ . '/../../src/Resources/config/contao/services.yml'),
-            realpath(__DIR__ . '/../../src/Resources/config/contao/extractor.yml'),
-            realpath(__DIR__ . '/../../src/Resources/config/contao/rock-solid-custom-elements.yml'),
-            realpath(__DIR__ . '/../../src/Resources/config/contao/terminal42-change-language.yml'),
-            realpath(__DIR__ . '/../../src/Resources/config/metamodels.yml'),
+        self::assertSame([
+            realpath(__DIR__ . '/../../src/Resources/config/contao/services.php'),
+            realpath(__DIR__ . '/../../src/Resources/config/contao/extractor.php'),
+            realpath(__DIR__ . '/../../src/Resources/config/contao/rock-solid-custom-elements.php'),
+            realpath(__DIR__ . '/../../src/Resources/config/contao/terminal42-change-language.php'),
+            realpath(__DIR__ . '/../../src/Resources/config/metamodels.php'),
         ], $files);
 
         $container->compile();
@@ -105,9 +86,9 @@ class CyberSpectrumI18NContaoExtensionTest extends TestCase
             }
         }
 
-        $this->assertSame([
-            realpath(__DIR__ . '/../../src/Resources/config/contao/services.yml'),
-            realpath(__DIR__ . '/../../src/Resources/config/contao/extractor.yml'),
+        self::assertSame([
+            realpath(__DIR__ . '/../../src/Resources/config/contao/services.php'),
+            realpath(__DIR__ . '/../../src/Resources/config/contao/extractor.php'),
         ], $files);
     }
 }

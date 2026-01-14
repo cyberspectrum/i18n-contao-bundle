@@ -1,0 +1,21 @@
+{
+  "symbol-whitelist" : [
+    "null", "true", "false",
+    "self", "parent",
+    "array", "string", "int", "float", "bool", "iterable", "callable", "void", "object",
+    "Contao\\ManagerPlugin\\Bundle\\BundlePluginInterface",
+    "Contao\\ManagerPlugin\\Bundle\\Config\\BundleConfig",
+    "Contao\\ManagerPlugin\\Bundle\\Parser\\ParserInterface",
+    "Contao\\ManagerPlugin\\Config\\ConfigPluginInterface",
+    "Contao\\ManagerPlugin\\Routing\\RoutingPluginInterface",
+    "CyberSpectrum\\I18N\\MetaModels\\MetaModelDictionaryDefinitionBuilder",
+    "CyberSpectrum\\I18N\\MetaModels\\MetaModelDictionaryProvider",
+    "MadeYourDay\\RockSolidCustomElements\\RockSolidCustomElementsBundle",
+    "MetaModels\\CoreBundle\\MetaModelsCoreBundle",
+    "CyberSpectrum\\I18N\\MetaModels\\MetaModelHandlerFactory",
+    "CyberSpectrum\\I18N\\MetaModels\\MetaModelTextHandlerFactory",
+    "MetaModels\\AttributeTranslatedLongtextBundle\\Attribute\\TranslatedLongtext",
+    "MetaModels\\AttributeTranslatedTextBundle\\Attribute\\TranslatedText",
+    "Terminal42\\ChangeLanguage\\Terminal42ChangeLanguageBundle"
+  ]
+}

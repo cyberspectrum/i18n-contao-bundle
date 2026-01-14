@@ -1,17 +1,31 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/6.1/phpunit.xsd"
-         colors="true"
-         bootstrap="vendor/autoload.php"
+<?xml version="1.0" encoding="utf-8"?>
+<!-- https://phpunit.de/manual/current/en/appendixes.configuration.html -->
+<phpunit
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.5/phpunit.xsd"
+        colors="true"
+        failOnRisky="true"
+        failOnWarning="true"
+        beStrictAboutChangesToGlobalState="true"
+        beStrictAboutOutputDuringTests="true"
+        bootstrap="vendor/autoload.php"
+        cacheDirectory=".phpunit.cache"
+        requireCoverageMetadata="true"
 >
   <testsuites>
-    <testsuite name="cyberspectrum/i18n-contao-bundle tests">
-      <directory>./tests/</directory>
+    <testsuite name="cyberspectrum/i18n tests">
+      <directory>tests</directory>
     </testsuite>
   </testsuites>
-  <filter>
-    <whitelist>
-      <directory>./src/</directory>
-    </whitelist>
-  </filter>
+  <coverage>
+    <report>
+      <html outputDirectory=".phpcq/coverage/" lowUpperBound="35" highLowerBound="70"/>
+      <text outputFile="php://stdout"/>
+    </report>
+  </coverage>
+  <source>
+    <include>
+      <directory>./src</directory>
+    </include>
+  </source>
 </phpunit>

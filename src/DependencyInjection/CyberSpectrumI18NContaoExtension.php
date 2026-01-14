@@ -1,23 +1,6 @@
 <?php
 
-/**
- * This file is part of cyberspectrum/i18n-contao-bundle.
- *
- * (c) 2018 CyberSpectrum.
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- *
- * This project is provided in good faith and hope to be usable by anyone.
- *
- * @package    cyberspectrum/i18n-contao-bundle
- * @author     Christian Schiffler <c.schiffler@cyberspectrum.de>
- * @copyright  2018 CyberSpectrum.
- * @license    https://github.com/cyberspectrum/i18n-contao-bundle/blob/master/LICENSE MIT
- * @filesource
- */
-
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace CyberSpectrum\I18N\ContaoBundle\DependencyInjection;
 
@@ -27,30 +10,41 @@ use MetaModels\CoreBundle\MetaModelsCoreBundle;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
-use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
+use Terminal42\ChangeLanguage\Terminal42ChangeLanguageBundle;
+
+use function array_key_exists;
+use function in_array;
 
 /**
  * This is the class that loads and manages the bundle configuration
  */
-class CyberSpectrumI18NContaoExtension extends Extension
+final class CyberSpectrumI18NContaoExtension extends Extension
 {
     /**
      * {@inheritDoc}
      */
-    public function load(array $configs, ContainerBuilder $container)
+    #[\Override]
+    public function load(array $configs, ContainerBuilder $container): void
     {
-        $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
-        $loader->load('contao/services.yml');
-        $loader->load('contao/extractor.yml');
+        $loader = new PhpFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
+        $loader->load('contao/services.php');
+        $loader->load('contao/extractor.php');
+
+        /** @psalm-suppress UndefinedClass - we do not need this class, this check is for feature detection only */
         if ($this->hasBundle(RockSolidCustomElementsBundle::class, $container)) {
-            $loader->load('contao/rock-solid-custom-elements.yml');
+            $loader->load('contao/rock-solid-custom-elements.php');
         }
-        if ($this->hasBundle('changelanguage', $container)) {
-            $loader->load('contao/terminal42-change-language.yml');
+        /** @psalm-suppress UndefinedClass - we do not need this class, this check is for feature detection only */
+        if (
+            $this->hasBundle('changelanguage', $container)
+            || $this->hasBundle(Terminal42ChangeLanguageBundle::class, $container)
+        ) {
+            $loader->load('contao/terminal42-change-language.php');
         }
         // Only activate if MetaModels bundle present.
         if ($this->hasBundle(MetaModelsCoreBundle::class, $container)) {
-            $loader->load('metamodels.yml');
+            $loader->load('metamodels.php');
         }
     }
 
@@ -59,12 +53,15 @@ class CyberSpectrumI18NContaoExtension extends Extension
      *
      * @param string           $class     The bundle class or bundle name.
      * @param ContainerBuilder $container The container builder.
-     *
-     * @return bool
      */
     private function hasBundle(string $class, ContainerBuilder $container): bool
     {
-        if (\in_array($class, $bundles = $container->getParameter('kernel.bundles'), true)) {
+        /**
+         * @var array<string, string> $bundles
+         * @psalm-suppress UndefinedDocblockClass - UnitEnum is added in PHP 8.1 and therefore throws in PHP 7.4.
+         */
+        $bundles = $container->getParameter('kernel.bundles');
+        if (in_array($class, $bundles, true)) {
             return true;
         }
 

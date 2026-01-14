@@ -1,3 +1,0 @@
-cyberspectrum_i18n.contao-backend:
-    path: /contao/cs.translations
-    defaults: { _controller: CyberSpectrum\I18N\ContaoBundle\Controller\ContaoInspectProblemsController, _scope: backend, _token_check: true }
