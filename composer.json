@@ -21,7 +21,7 @@
     "source": "https://github.com/cyberspectrum/i18n-contao-bundle"
   },
   "require": {
-    "php": "^8.1",
+    "php": "^8.2",
     "ext-hash": "*",
     "ext-json": "*",
     "contao/core-bundle": "^4.13.0 || ^5.3",
