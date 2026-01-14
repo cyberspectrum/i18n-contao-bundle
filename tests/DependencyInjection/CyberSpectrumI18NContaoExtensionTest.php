@@ -8,15 +8,13 @@ use Contao\CoreBundle\HttpKernel\Bundle\ContaoModuleBundle;
 use CyberSpectrum\I18N\ContaoBundle\DependencyInjection\CyberSpectrumI18NContaoExtension;
 use MadeYourDay\RockSolidCustomElements\RockSolidCustomElementsBundle;
 use MetaModels\CoreBundle\MetaModelsCoreBundle;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Config\Resource\FileResource;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-/**
- * This tests the bundle.
- *
- * @covers \CyberSpectrum\I18N\ContaoBundle\DependencyInjection\CyberSpectrumI18NContaoExtension
- */
+/** This tests the bundle. */
+#[CoversClass(CyberSpectrumI18NContaoExtension::class)]
 class CyberSpectrumI18NContaoExtensionTest extends TestCase
 {
     public function testLoad(): void

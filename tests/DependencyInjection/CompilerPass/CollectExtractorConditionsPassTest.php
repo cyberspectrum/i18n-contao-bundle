@@ -9,6 +9,7 @@ use CyberSpectrum\I18N\Contao\Extractor\ExtractorInterface;
 use CyberSpectrum\I18N\Contao\Extractor\MultiStringExtractorInterface;
 use CyberSpectrum\I18N\Contao\Extractor\StringExtractorInterface;
 use CyberSpectrum\I18N\ContaoBundle\DependencyInjection\CompilerPass\CollectExtractorConditionsPass;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -17,14 +18,14 @@ use Symfony\Component\DependencyInjection\Reference;
 
 use function get_class;
 
-/** @covers \CyberSpectrum\I18N\ContaoBundle\DependencyInjection\CompilerPass\CollectExtractorConditionsPass */
+#[CoversClass(CollectExtractorConditionsPass::class)]
 class CollectExtractorConditionsPassTest extends TestCase
 {
     public function testCollectStringExtractorInterface(): void
     {
         $container = new ContainerBuilder();
 
-        $mock = $this->getMockForAbstractClass(StringExtractorInterface::class);
+        $mock = $this->getMockBuilder(StringExtractorInterface::class)->getMock();
 
         $tagged = new Definition(get_class($mock));
         $tagged->addTag(
@@ -48,7 +49,7 @@ class CollectExtractorConditionsPassTest extends TestCase
     {
         $container = new ContainerBuilder();
 
-        $mock = $this->getMockForAbstractClass(MultiStringExtractorInterface::class);
+        $mock = $this->getMockBuilder(MultiStringExtractorInterface::class)->getMock();
 
         $tagged = new Definition(get_class($mock));
         $tagged->addTag(
@@ -72,7 +73,7 @@ class CollectExtractorConditionsPassTest extends TestCase
     {
         $container = new ContainerBuilder();
 
-        $mock = $this->getMockForAbstractClass(ExtractorInterface::class);
+        $mock = $this->getMockBuilder(ExtractorInterface::class)->getMock();
 
         $tagged = new Definition($class = get_class($mock));
         $tagged->addTag(
@@ -93,7 +94,7 @@ class CollectExtractorConditionsPassTest extends TestCase
     public function testDoesNotDecorateTwice(): void
     {
         $container = new ContainerBuilder();
-        $mock      = $this->getMockForAbstractClass(MultiStringExtractorInterface::class);
+        $mock      = $this->getMockBuilder(MultiStringExtractorInterface::class)->getMock();
         $tagged    = new Definition(get_class($mock));
         $tagged->addTag(
             CollectExtractorConditionsPass::TAG_CONTAO_EXTRACTOR_CONDITION,
@@ -114,7 +115,7 @@ class CollectExtractorConditionsPassTest extends TestCase
     public function testDoesNotDecorateConditionalService(): void
     {
         $container = new ContainerBuilder();
-        $mock      = $this->getMockForAbstractClass(ConditionalExtractorInterface::class);
+        $mock      = $this->getMockBuilder(ConditionalExtractorInterface::class)->getMock();
         $tagged    = new Definition(get_class($mock));
         $tagged->addTag(
             CollectExtractorConditionsPass::TAG_CONTAO_EXTRACTOR_CONDITION,
@@ -135,7 +136,7 @@ class CollectExtractorConditionsPassTest extends TestCase
     public function testCollectExtractorsThrowsForTagWithoutConditionType(): void
     {
         $container = new ContainerBuilder();
-        $mock      = $this->getMockForAbstractClass(StringExtractorInterface::class);
+        $mock      = $this->getMockBuilder(StringExtractorInterface::class)->getMock();
         $tagged    = new Definition(get_class($mock));
         $tagged->addTag(CollectExtractorConditionsPass::TAG_CONTAO_EXTRACTOR_CONDITION);
         $container->addDefinitions(['service' => $tagged]);
@@ -150,7 +151,7 @@ class CollectExtractorConditionsPassTest extends TestCase
     public function testCollectExtractorsThrowsForTagWithoutExpression(): void
     {
         $container = new ContainerBuilder();
-        $mock      = $this->getMockForAbstractClass(StringExtractorInterface::class);
+        $mock      = $this->getMockBuilder(StringExtractorInterface::class)->getMock();
         $tagged    = new Definition(get_class($mock));
         $tagged->addTag(CollectExtractorConditionsPass::TAG_CONTAO_EXTRACTOR_CONDITION, ['type' => 'expression']);
         $container->addDefinitions(['service' => $tagged]);
@@ -165,7 +166,7 @@ class CollectExtractorConditionsPassTest extends TestCase
     public function testCollectExtractorsThrowsForTagWithUnknownType(): void
     {
         $container = new ContainerBuilder();
-        $mock      = $this->getMockForAbstractClass(StringExtractorInterface::class);
+        $mock      = $this->getMockBuilder(StringExtractorInterface::class)->getMock();
         $tagged    = new Definition(get_class($mock));
         $tagged->addTag(CollectExtractorConditionsPass::TAG_CONTAO_EXTRACTOR_CONDITION, ['type' => '-unknown-']);
         $container->addDefinitions(['service' => $tagged]);

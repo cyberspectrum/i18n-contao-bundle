@@ -11,13 +11,14 @@ use CyberSpectrum\I18N\ContaoBundle\DependencyInjection\CompilerPass\CollectMeta
 use CyberSpectrum\I18N\ContaoBundle\DependencyInjection\CompilerPass\RegisterDictionaryTypesPass;
 use CyberSpectrum\I18N\ContaoBundle\DependencyInjection\CompilerPass\SetDefaultsPass;
 use CyberSpectrum\I18N\ContaoBundle\DependencyInjection\CompilerPass\UpdateForRockSolidCustomElementPass;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\Compiler\PassConfig;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 use function func_get_args;
 
-/** @covers \CyberSpectrum\I18N\ContaoBundle\CyberSpectrumI18NContaoBundle */
+#[CoversClass(CyberSpectrumI18NContaoBundle::class)]
 class CyberSpectrumI18NContaoBundleTest extends TestCase
 {
     public function testBuild(): void

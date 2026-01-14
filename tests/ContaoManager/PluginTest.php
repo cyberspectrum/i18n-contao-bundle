@@ -11,6 +11,7 @@ use CyberSpectrum\I18N\ContaoBundle\ContaoManager\Plugin;
 use CyberSpectrum\I18N\ContaoBundle\CyberSpectrumI18NContaoBundle;
 use CyberSpectrum\I18NBundle\CyberSpectrumI18NBundle;
 use MetaModels\CoreBundle\MetaModelsCoreBundle;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Component\Config\Loader\LoaderInterface;
@@ -20,13 +21,13 @@ use Symfony\Component\Routing\RouteCollection;
 
 use function realpath;
 
-/** @covers \CyberSpectrum\I18N\ContaoBundle\ContaoManager\Plugin */
+#[CoversClass(Plugin::class)]
 class PluginTest extends TestCase
 {
     public function testGetBundles(): void
     {
         $plugin  = new Plugin();
-        $bundles = $plugin->getBundles($this->getMockForAbstractClass(ParserInterface::class));
+        $bundles = $plugin->getBundles($this->getMockBuilder(ParserInterface::class)->getMock());
 
         self::assertCount(2, $bundles);
         /** @var ConfigInterface $bundle */
@@ -48,7 +49,7 @@ class PluginTest extends TestCase
     public function testRegisterContainerConfiguration(): void
     {
         $plugin  = new Plugin();
-        $loader  = $this->getMockForAbstractClass(LoaderInterface::class);
+        $loader  = $this->getMockBuilder(LoaderInterface::class)->getMock();
         $loader
             ->expects($this->once())
             ->method('load')

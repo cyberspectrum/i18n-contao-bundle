@@ -7,6 +7,7 @@ namespace CyberSpectrum\I18N\ContaoBundle\Test\DependencyInjection\CompilerPass;
 use CyberSpectrum\I18N\Contao\Extractor\StringExtractorInterface;
 use CyberSpectrum\I18N\Contao\ExtractorFactory;
 use CyberSpectrum\I18N\ContaoBundle\DependencyInjection\CompilerPass\CollectContaoExtractorsPass;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -16,7 +17,7 @@ use Symfony\Component\DependencyInjection\ServiceLocator;
 
 use function array_keys;
 
-/** @covers \CyberSpectrum\I18N\ContaoBundle\DependencyInjection\CompilerPass\CollectContaoExtractorsPass */
+#[CoversClass(CollectContaoExtractorsPass::class)]
 class CollectContaoExtractorsPassTest extends TestCase
 {
     public function testCollectExtractors(): void
