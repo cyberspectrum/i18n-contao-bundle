@@ -48,7 +48,7 @@
     "contao-community-alliance/dc-general": "^2.3",
     "contao/manager-plugin": "^2.13",
     "cyberspectrum/i18n-metamodels": "^1.1@dev",
-    "metamodels/core": "^2.3.0@dev",
+    "metamodels/core": "^2.4.10@dev",
     "phpcq/runner-bootstrap": "^1.0@dev"
   },
   "suggest": {
