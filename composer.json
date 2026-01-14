@@ -75,7 +75,7 @@
   },
   "extra": {
     "branch-alias": {
-      "dev-fix/phpcq-2": "1.1.x-dev"
+      "dev-master": "1.1.x-dev"
     },
     "contao-manager-plugin": "CyberSpectrum\\I18N\\ContaoBundle\\ContaoManager\\Plugin"
   }
