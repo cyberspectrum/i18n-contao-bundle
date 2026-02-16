@@ -26,6 +26,14 @@ jobs:
             phpcq_install: 'update'
             phpcq_flags: ''
             composer_install: 'update'
+          - php: '8.4'
+            phpcq_install: 'update'
+            phpcq_flags: ''
+            composer_install: 'update'
+          - php: '8.5'
+            phpcq_install: 'update'
+            phpcq_flags: ''
+            composer_install: 'update'
 
     steps:
       - name: PHP ${{ matrix.php }} Pull source
@@ -53,9 +61,19 @@ jobs:
           cache-name: composer-vendor-${{ matrix.php }}
         with:
           path: vendor
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/composer.lock') }}
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.composer_install }}-${{ hashFiles('**/composer.lock') }}
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-name }}-
+
+      - name: PHP ${{ matrix.php }} Cache phpcq directory
+        uses: actions/cache@v5
+        env:
+          cache-name: phpcq-dir-${{ matrix.php }}
+        with:
+          path: |
+            .phpcq/gnupg/
+            .phpcq/plugins/
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.phpcq_install }}-${{ matrix.phpcq_flags }}-${{ matrix.composer_install }}
 
       - name: PHP ${{ matrix.php }} Install composer dependencies
         run: composer ${{ matrix.composer_install }} --prefer-stable --no-interaction --no-progress
@@ -71,7 +89,7 @@ jobs:
 
       - name: PHP ${{ matrix.php }} Upload build directory to artifact
         uses: actions/upload-artifact@v6
-        if: ${{ success() }} || ${{ failure() }}
+        if: ${{ success() || failure() }}
         with:
           name: phpcq-builds-php-${{ matrix.php }}-${{ matrix.phpcq_install }}-${{ matrix.phpcq_flags }}-${{ matrix.composer_install }}
           path: .phpcq/build/
