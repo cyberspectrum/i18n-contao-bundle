@@ -42,6 +42,8 @@ phpcq:
       version: ^1.0
       signed: false
   trusted-keys:
+    # phpcq team
+    - 6659B17090D6C5D3
     # sb@sebastian-bergmann.de
     - 4AA394086372C20A
     # psalm
